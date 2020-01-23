@@ -1,0 +1,313 @@
+*{
+  box-sizing: border-box;
+  color: black;
+}
+.pa {
+  display: flex;
+}
+
+.pa_child{
+  border: 1px solid black;
+}
+body {
+  padding: 2%;
+  font-family: 'Prompt', sans-serif;
+  background-color:white;
+  overflow: hidden;
+  }
+
+/* Tablet*/
+@media(min-width:767px){
+
+  header{
+  overflow: hidden;
+  }
+  .envio{
+  width: 75%;
+   }
+  .img{
+  width: 80%;
+  height: 100%;
+ }
+
+
+  .busqueda,
+  .login{
+   position: absolute;
+   right: 10px;
+   margin-top: 15px;
+   width: 50%;
+  
+  }
+  .links{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  height:70%
+  }
+
+  .redes, .pagos, .company, .help{
+    font-size: x-large
+  }
+ }
+
+
+
+@media(min-width:1000px){
+  .envio{
+    width: 75%;
+     }
+    .logo{
+    width: 50%;
+    height: 50%;
+   }
+  .links{
+    object-position: center;
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    height:70%
+    }
+
+    .busqueda{
+      float: inline-end;
+
+    }
+    .login{
+     position: absolute;
+     right: 10px;
+     margin-top: 15px;
+     width: 50%;
+    
+    }
+
+  footer{
+    font-size: xx-large
+  }
+  .boton {
+      
+    display: inline-block;
+    border-radius: 4px;
+    background-color:rgb(0, 68, 255);
+    border: none;
+    color: rgb(14, 13, 13);
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    width: 150px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    flex-wrap: wrap;
+    justify-items: right;
+
+  }
+
+
+
+
+}
+
+
+
+
+/*Header*/
+
+ul{ 
+    list-style-type: none;
+    list-style:none;
+    padding:0;
+    margin:0;
+    }
+
+.envio{
+   display:flex;
+   flex-wrap: wrap;
+   border:solid rgb(253, 20, 3) 2px;
+   font-size: smaller;
+   justify-content:  center;
+   margin:7%;
+   color:rgb(240, 3, 3);
+   width:95%;
+  
+      }
+
+.container{
+  display:flex;
+  flex-wrap: wrap;
+  margin:auto;
+  justify-content: space-between;
+  align-self:center;
+  width:95%;
+}
+
+.logo{
+size: 5%;
+display: flex;
+align-items: left;}
+
+.logo img{
+  width: 50%;
+  height: 80%;
+ 
+}
+
+.busqueda{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  float: left;
+  width:40%;
+  align-content: center;
+
+  }
+
+form input[type="search"]{
+width: 80%;
+  }
+
+.login{
+ float: left;
+ margin-top: 15px;
+ align-items: flex-end;
+ width: 50%;
+}
+
+
+.links {
+  height: 50%;
+  display:flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  margin-top: 10%;
+  align-content: center;
+  list-style: none;
+  float: left;
+
+    
+      
+}
+
+/*Footer*/
+
+.pie{
+  display:flex;
+  flex-wrap: wrap;
+  width: 95%;
+  margin:auto;
+  margin-top: 5%;
+  justify-content: space-between;
+
+ 
+  
+}
+.redes{ 
+  display:flex;
+  flex-wrap: wrap;
+  width:15%;
+  justify-content:space-around
+}
+
+.help{ 
+  display:flex;
+  flex-wrap: wrap;
+  width:15%;
+  justify-content:space-around;
+  font-size: x-small;
+}
+.pagos{ 
+  display:flex;
+  flex-wrap: wrap;
+  width:20%;
+  justify-content:space-around;
+  
+}
+.company{ 
+  display:flex;
+  flex-wrap: wrap;
+  width:15%;
+  justify-content:space-around;
+  font-size:x-small ;
+}
+
+
+    /* REGISTRO*/
+
+    .titular{
+     font-size: 20px;
+     text-align: center;
+     text-decoration: underline;
+      }
+
+    .registro{
+      display:flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-bottom: 10%;
+
+
+      }
+      form input[type="text"],
+      form select,
+      form input[type="date"],
+      form input[type="password"],
+      form input[type="email"]{
+        width:100%;
+        padding:3px 10px;
+        border:1px solid #f6f6f6;
+        border-radius:3px;
+        color:black;
+        margin:8px 0;
+        display:inline-block;
+      }
+
+      .boton {
+      
+        display: inline-block;
+        border-radius: 4px;
+        background-color:rgb(21, 22, 22);
+        border: none;
+        color: white;
+        text-align: center;
+        font-size: 12px;
+        padding: 7px;
+        width: 80px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+        flex-wrap: wrap;
+        justify-items: right;
+
+      }
+
+      /*FAQ*/
+    
+      .title{
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+        margin-bottom: 3%;
+        text-decoration: white;
+        font-size:80%;
+      }
+      .question{
+        margin-left: 5%;
+        margin-right: 5%;
+        font-size:75%;
+      }
+      .answer{
+        margin-left: 8%;
+        margin-right: 5%;
+        margin-bottom: 2%;
+        text-align: justify;
+        font-size:75%;
+      }

@@ -1,0 +1,63 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<div class="pc">
+    <div class="pc_child">
+        <div>
+            <h1 class="cart">CARRITO DE COMPRAS</h1>
+        </div>
+
+        <div class="cart_div">
+            <img class="cart" src="../images/mujer.jpg" alt="">
+            <h4 class="cart">Nombre producto</h4>
+            <input class="cart" type="number" name="numero" value="1" min="1" max="10">
+        </div>
+        <div class="cart_div">
+            <img class="cart" src="../images/mujer.jpg" alt="">
+            <h4 class="cart">Nombre producto</h4>
+            <input class="cart" type="number" name="numero" value="1" min="1" max="10">
+        </div>
+    </div>
+    <div class="pc_detail">
+        <div class="pc_detail_child1">
+            <h1>DETALLE DE LA COMPRA</h1>
+        </div>
+        <div class="pc_detail_child2">
+            <h4>nombre del producto</h4>
+            <h4>$999</h4>
+        </div>
+        <div class="pc_detail_child2">
+            <h4>nombre del producto</h4>
+            <h4>$999</h4>
+        </div>
+        <div class="pc_detail_child3">
+            <h1>total</h1>
+            <h4>$9999</h4>
+        </div>
+        <div class="pc_detail_child4">
+            <button class="boton-register">REALIZAR ORDEN</button>
+        </div>
+    </div >
+</div>
+<div class="pc_pay">
+    <div class="pc_icons1">
+        <i class="fas fa-truck"></i>
+        <p>ENVIO SIN CARGO A PARTIR DE $1999 </p>
+        <i class="fas fa-history"></i>
+        <p>DEVOLUCIONES SIN CARGO</p>
+    </div>
+    <div class="pc_continue">
+        <i class="fas fa-check"></i>
+        <a href="/"><p>CONTINUAR COMPRANDO</p></a>
+    </div>
+    <div class="pc_icons2">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+    </div>
+    <div class="pc_medios">
+        <p>Mercado pago</p>
+        <p>Rapipago</p>
+        <p>Pago Fácil</p>
+    </div>
+</div>
+<%- include('partials/footer') %>

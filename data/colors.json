@@ -1,0 +1,64 @@
+[
+    
+{
+    "id" : 1,
+"name" : "Blanco" 
+},
+{
+    "id" : 2,
+"name" : "Gris" 
+},
+{
+    "id" : 3,
+"name" : "Azul" 
+},
+{
+    "id" : 4,
+"name" : "Verde" 
+},
+{
+    "id" : 5,
+"name" : "Rojo" 
+},
+{
+    "id" : 6,
+"name" : "Amarillo" 
+},
+{
+    "id" : 7,
+"name" : "Naranja" 
+},
+{
+    "id" : 8,
+"name" : "Bordo" 
+},
+{
+    "id" : 9,
+"name" : "Rosa" 
+},
+{
+    "id" : 10,
+"name" : "Celeste" 
+},
+{
+    "id" : 11,
+"name" : "Natural" 
+},
+{
+    "id" : 12,
+"name" : "Fucsia" 
+},
+{
+    "id" : 13,
+"name" : "Lila" 
+},
+{
+    "id" : 14,
+"name" : "Mostaza" 
+
+},
+{
+    "id" : 15,
+"name" : "Negro" 
+}
+]
