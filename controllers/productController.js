@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-
-const productFilePath = __dirname + '/../data/products.json';
-const userFilePath = __dirname + '/../data/users.json';
+const productFilePath = path.join(__dirname, '/../data/products.json');
 let productsContent = fs.readFileSync(productFilePath, 'utf-8');
 
 function getProducts() {
@@ -12,14 +10,11 @@ function getProducts() {
     return finalProducts;
 }
 
-
 function storeProduct(newProduct) {
     let allProducts = getProducts();
     allProducts.push(newProduct);
     fs.writeFileSync(productFilePath, JSON.stringify(allProducts, null, ' '));
 }
-
-
 
 function generateProductId() {
     let allProducts = getProducts();
@@ -37,68 +32,41 @@ function getProductById(id) {
     return productToFind;
 }
 
-function getUserById(id) {
-    // Es igual al de mail pero con el id
-	let allUsers = getAllUsers();
-	let userToFind = allUsers.find(oneUser => oneUser.id == id);
-	return userToFind;
-}
-
-function getAllUsers () {
-    //leemos el archivo que se guardo con fs.readFileSync, esta funcion recibe la ruta del archivo que se quiere leer y la codificacion
-        let usersFileContent = fs.readFileSync(userFilePath, 'utf-8');
-        //despues de leerlo se crea una variable en la que preguntamos si lo que se leyo esta vacio si es true se crea un array y si es falso parseamos el contenido que es un string y lo pasamos a ser array con la funcion JSON.parse
-        let finalUsers = usersFileContent == '' ? [] : JSON.parse(usersFileContent); 
-        return finalUsers;
-    }
-
-
 let productController = {
-    
+    /*
+        Como ahora las variables isLogged y userLogged están en res.locals,
+        aquí ya no es necesario ni generar esas variables, ni pasar las mismas
+        a la vista al momento de res.render.
+        Idem para todos los métodos
+    */
     productDetail: (req, res) => {
-        let productsContent = fs.readFileSync(productFilePath, 'utf-8');
-        let products = JSON.parse(productsContent);
-        let productId = req.params.id;
-        let productFind = products.find(producto => producto.id == productId);
-        const isLogged = req.session.userId ? true : false;
-        let userLogged = getUserById(req.session.userId);
+        let productFind = getProductById(req.params.id);
         const colors = require('../data/colors.json')
         res.render('productDetail', {
-            
             productFind: productFind,
             title: 'Detail',
             bodyName: 'detail',
-            isLogged,
-            userLogged,
             colors
         })
 
     },
 
     productCart: (req, res) => {
-        const isLogged = req.session.userId ? true : false;
-		let userLogged = getUserById(req.session.userId);
         res.render('productCart', {
             title: 'Product cart',
             bodyName: 'cart',
-            isLogged,
-            userLogged
         })
 
     },
 
-
     productShow: (req, res) => {
-        const isLogged = req.session.userId ? true : false;
-		let userLogged = getUserById(req.session.userId);
         res.render('productAdd', {
             title: 'Product Add',
             bodyName: 'add',
-            isLogged,
-            userLogged
         })
 
     },
+
     productAdd: (req, res, next) => {
         let newAddProduct = {
             id: generateProductId(),
@@ -111,52 +79,41 @@ let productController = {
             talle: req.body.size,
             status: req.body.status,
             avatar: req.file.filename,
-
-
         };
 
         storeProduct(newAddProduct);
+
+        return res.redirect('/');
     },
 
     deleteProduct: (req, res) => {
-
-        let productosArray = JSON.parse(productsContent);
-        let productosSinElQueBorramos = productosArray.filter(function (unProducto) {
+        let products = getProducts();
+        let productosSinElQueBorramos = products.filter(function (unProducto) {
             return unProducto.id != req.params.id;
         })
         // guardo el array con los productos finales
         fs.writeFileSync(productFilePath, JSON.stringify(productosSinElQueBorramos, null, ' '));
         res.redirect('/');
-
     },
+
     editProductShow: (req, res) => {
-        let productsContent = fs.readFileSync(productFilePath, 'utf-8');
-        let products = JSON.parse(productsContent);
-        let productId = req.params.id;
-        let productFind = products.find(producto => producto.id == productId);
-
-            /* let colors = [
-                "Negro", "Blanco", "Gris", "Azul", "Verde", "Rojo", "Naranja", "Bordo", "Rosa", "Celeste", "Natural", "Fucsia", "Lila", "Mostaza"
-            ] */
-            const colors = require('../data/colors.json');
-            /* let colorFound = colors.filter(color => color != productFind.color);
-            let colorSolo = colors.filter(color => color == productFind.color);
-            let colorFinal = [...colorSolo, ...colorFound] */
-            const sizes = require ('../data/sizes.json');
-            const categories = require('../data/categories.json');
-            const typesOfProducts = require('../data/typesOfProducts.json');
-            const status = require('../data/status.json');
-
-            
+        /* let colors = [
+            "Negro", "Blanco", "Gris", "Azul", "Verde", "Rojo", "Naranja", "Bordo", "Rosa", "Celeste", "Natural", "Fucsia", "Lila", "Mostaza"
+        ] */
+        /* let colorFound = colors.filter(color => color != productFind.color);
+        let colorSolo = colors.filter(color => color == productFind.color);
+        let colorFinal = [...colorSolo, ...colorFound] */
+        let productFind = getProductById(req.params.id);
+        const colors = require('../data/colors.json');
+        const sizes = require ('../data/sizes.json');
+        const categories = require('../data/categories.json');
+        const typesOfProducts = require('../data/typesOfProducts.json');
+        const status = require('../data/status.json');
       
-        const isLogged = req.session.userId ? true : false;
-		let userLogged = getUserById(req.session.userId);
         res.render('productEdit', {
             productFind: productFind,
             title: 'Edit',
             bodyName: 'edit',
-            isLogged,
-            userLogged,
             colors,
             sizes,
             categories,
@@ -164,8 +121,8 @@ let productController = {
             status
         })
     },
+
     editProduct: (req, res) => {
-        2
         let products = getProducts();
         let productId = parseInt(req.params.id); //router.put('/productEdit/:id'
 

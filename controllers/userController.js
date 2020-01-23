@@ -1,13 +1,12 @@
-
 const fs = require('fs');
 const bcrypt = require('bcrypt');
+const path = require('path');
 
 //ruta donde se almacenan los usuarios que se crean en el form register
-const userFilePath = __dirname + '/../data/users.json';
-
+const userFilePath = path.join(__dirname, '/../data/users.json');
 
 function getAllUsers () {
-//leemos el archivo que se guardo con fs.readFileSync, esta funcion recibe la ruta del archivo que se quiere leer y la codificacion
+    // leemos el archivo que se guardo con fs.readFileSync, esta funcion recibe la ruta del archivo que se quiere leer y la codificacion
     let usersFileContent = fs.readFileSync(userFilePath, 'utf-8');
     //despues de leerlo se crea una variable en la que preguntamos si lo que se leyo esta vacio si es true se crea un array y si es falso parseamos el contenido que es un string y lo pasamos a ser array con la funcion JSON.parse
 	let finalUsers = usersFileContent == '' ? [] : JSON.parse(usersFileContent); 
@@ -50,50 +49,50 @@ function getUserById(id) {
 }
 
 const userController = {
+    /*
+        Como ahora las variables isLogged y userLogged están en res.locals,
+        aquí ya no es necesario ni generar esas variables, ni pasar las mismas
+        a la vista al momento de res.render.
+        Idem para todos los métodos
+    */
     register: (req, res) => {
-        const isLogged = req.session.userId ? true : false;
-		let userLogged = getUserById(req.session.userId);
         res.render('register', {
             title: 'Register',
             bodyName: 'register', 
-            isLogged, 
-            userLogged
         })
 
     },
-    login: (req, res) => {
-        const isLogged = req.session.userId ? true : false;
-		let userLogged = getUserById(req.session.userId);
+
+    login: (req, res) => {    
         res.render('login', {
             title: 'Login',
             bodyName: 'bodyLogin', 
-            isLogged, 
-            userLogged
         })
 
     },
+    
     registerStore: (req, res) => {
         //para registrar los usuarios hacemos un obejto literal le asignamos la propiedad y como valor pasamos lo que se recibe del formulario de registro en el req.body
-            let userFinalData = {
-                id: generateUserId(),
-                nombre: req.body.nombre,
-                apellido: req.body.apellido,
-                fecha: req.body.fecha,
-                pais: req.body.pais,
-                ciudad: req.body.ciudad,
-                email: req.body.mail,
-                password: bcrypt.hashSync(req.body.pass, 10),
-                avatar: req.file.filename,
-            };
-            
-            // Guardar al usario con la funcion store 
-    
-            storeUser(userFinalData);
-            
-            // Redirección al login
-            res.redirect('/users/login');
+        let userFinalData = {
+            id: generateUserId(),
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            fecha: req.body.fecha,
+            pais: req.body.pais,
+            ciudad: req.body.ciudad,
+            email: req.body.mail,
+            password: bcrypt.hashSync(req.body.pass, 10),
+            avatar: req.file.filename,
+        };
+        
+        // Guardar al usario con la funcion store 
 
+        storeUser(userFinalData);
+        
+        // Redirección al login
+        res.redirect('/users/login');
     },
+
     procesarLogin: (req, res) => {
         // Consigo al usuario comparando el mail de cada usuario de la base de datos con el mail que recibo del formulario por el req.body
         let user = getUserByEmail(req.body.email);
@@ -125,17 +124,14 @@ const userController = {
 			res.send('No hay usuarios registrados con ese email');
 		}
     },
-    profile: (req, res) => {
-        const isLogged = req.session.userId ? true : false;
-		let userLogged = getUserById(req.session.userId);
-        res.render('profile', {
-        title: 'Profile',
-        bodyName: 'profile',
-        isLogged,
-        userLogged,
 
-    });
+    profile: (req, res) => {
+        res.render('profile', {
+            title: 'Profile',
+            bodyName: 'profile',
+        });
     },
+
     logout: (req, res) => {
 		// Destruir la session
 		req.session.destroy();

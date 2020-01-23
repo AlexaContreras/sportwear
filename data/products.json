@@ -46,5 +46,17 @@
   "talle": "1",
   "status": "1",
   "avatar": "product_avatar_1579222822519.png"
+ },
+ {
+  "id": 5,
+  "nombre": "Nuevo by Javi",
+  "precio": "2213",
+  "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate ",
+  "categoria": "2",
+  "tipo": "2",
+  "color": "3",
+  "talle": "1",
+  "status": "2",
+  "avatar": "product_avatar_1579777413846.jpg"
  }
 ]

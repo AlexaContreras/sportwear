@@ -28,6 +28,8 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(userCookieMiddleware);
+// Middleware que setea res.locals va después del middleware de cookies
+app.use(isLoggedMiddleware);
 
 const mainRouter = require('./routes/main')
 app.use('/', mainRouter);
