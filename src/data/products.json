@@ -1,0 +1,14 @@
+[
+ {
+  "id": 1,
+  "name": "Shoes",
+  "price": "$999",
+  "description": "Este buzo te permite presumir de estilo incluso en los días más fríos. Está confeccionado en felpa suave con los puños y el dobladillo acanalados para mantenerlo en su lugar en todo momento. Un estampado minimalista de adidas Skateboarding en el frente remata el look.",
+  "category": "2",
+  "type": "2",
+  "color": "1",
+  "size": "2",
+  "status": "1",
+  "avatar": "product_avatar_1579904564651.png"
+ }
+]

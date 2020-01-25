@@ -1,0 +1,92 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<div class="addBody">
+    <h1 class="titleAdd">EDITAR PRODUCTO</h1>
+    <form action="/productEdit/<%= productFind.id %>?_method=PUT" method="POST" enctype="multipart/form-data" >
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Nombre del producto:</label class"col-12">
+                <input class="col-12" type="text" name="productName" value="<%= productFind.name %>">
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Precio del producto:</label>
+                <input class="col-12" type="text" name="productPrice" value="<%= productFind.price %>">
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Descripción del producto:</label>
+                <textarea class="col-12" name="productDescription" placeholder="<%= productFind.description%>"></textarea>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Color:</label>
+
+                <select class="col-12" name="color" >
+                    <option value="">Seleccione un color</option>
+                   <<% colors.forEach(color => { %>
+                    <option value="<%=color.id%>" <%= productFind.color == color.id ? "selected" : "" %> /><%=color.name%></option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Talle:</label>
+                <select class="col-12 add" name="size">
+                    <option value="">Seleccione un Talle</option>
+                   <<% sizes.forEach(size => { %>
+                    <option value="<%=size.id%>" <%= productFind.size == size.id ? "selected" : "" %> /><%=size.name%></option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Categoria:</label>
+                <select class="col-12 add" name="category">
+                    <option value="">Seleccione Categoria</option>
+                    <<% categories.forEach(category => { %>
+                        <option value="<%=category.id%>" <%= productFind.category == category.id ? "selected" : "" %> /><%=category.name%></option>
+                        <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Tipo de producto:</label>
+                <select class="col-12 add" name="type">
+                    <option value="">Seleccione el tipo:</option>
+                    <<% typesOfProducts.forEach(type=> { %>
+                        <option value="<%=type.id%>" <%= productFind.type == type.id ? "selected" : "" %> /><%=type.name%></option>
+                        <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Status:</label>
+                <select class="col-12 add" name="status">
+                    <option value="N">Seleccione el status:</option>
+                    <<% status.forEach(state => { %>
+                        <option value="<%=state.id%>" <%= productFind.status == state.id ? "selected" : "" %> /><%=state.name%></option>
+                        <% }) %>
+                    
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd examinar">
+                <label class="col-12 examinar">SUBIR IMAGÉN</label>
+                <input class="col-12 examinar" type="file" name="avatar">
+            </p>
+        </div>
+        <button class="botonAdd" type="submit">Editar</button>
+    </form>
+</div>
+
+</body>
+<%- include('partials/footer') %>
