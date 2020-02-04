@@ -1,0 +1,19 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<form action="/users/login" method="post">
+    <div class="container-login">
+      <label for="uname">CORREO ELECTRÓNICO</label>
+      <input type="text" class="login-input" placeholder="Ingrese correo electrónico" name="email" required>
+  
+      <label for="psw">CONTRASEÑA</label>
+      <input type="password" class="login-input" placeholder="Inserte contraseña" name="password" required>
+  
+      <button class="btn-login" type="submit">LOGIN</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Recordar mis datos
+      </label> 
+      <span class="psw">Olvidaste tu <a href="#">contraseña?</a></span>
+      
+    </div>
+  </form>
+<%- include('../partials/footer') %>

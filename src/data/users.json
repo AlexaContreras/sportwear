@@ -4,142 +4,21 @@
   "first_name": "Alexa",
   "last_name": "Contreras",
   "date": "1994-06-15",
-  "country": "VZ",
+  "country": "AR",
   "city": "CABA",
   "email": "alexaila@outlook.com",
-  "password": "$2b$10$6wR5OzdJvmX.1spgmWvpl.M3as3SYvmlMO1bYwylS8R/4PTxqbT4C",
-  "avatar": "user_avatar_1579905330002.jpeg"
+  "password": "$2b$10$Y6MPOcDBHLwhVeg29e6LKeXMHJlUH9Hl72eCwmqSpGVTcHMj6YD2C",
+  "avatar": "user_avatar_1579965198979.jpeg"
  },
  {
   "id": 2,
-  "first_name": "Alex",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexcontrerasruiz@gmail.com",
-  "password": "$2b$10$RJlPKHPdqMWaKdGfdM9QmOLJL1uRP6jvjpGALEaIDq0KJylYWZEiW",
-  "avatar": "user_avatar_1579913500463.jpeg"
- },
- {
-  "id": 3,
-  "first_name": "Alex",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexcontrerasruiz@gmail.com",
-  "password": "$2b$10$FpSJyXlS.fNEn8UsFtdx3Ox4KR9SVy6U8thNq1df/68WVkcRs4M.y",
-  "avatar": "user_avatar_1579913586542.jpeg"
- },
- {
-  "id": 4,
-  "first_name": "Alex",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexcontrerasruiz@gmail.com",
-  "password": "$2b$10$aI/Fm2weax3th3a.L.boQuReNi.qgzuwWx.4HbUkhHhxVQkIx71Fu",
-  "avatar": "user_avatar_1579913646702.jpeg"
- },
- {
-  "id": 5,
-  "first_name": "Alex",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexcontrerasruiz@gmail.com",
-  "password": "$2b$10$syOe5.kL6sDITJOaSgW3leOTv6kSbKmKZuDhC3iDKSYaD8ygdvreK",
-  "avatar": "user_avatar_1579913753695.jpeg"
- },
- {
-  "id": 6,
-  "first_name": "Alex",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexcontrerasruiz@gmail.com",
-  "password": "$2b$10$5xzNeK2ztt8ba3vJ7B0EWei7tfPGJSTCJhaznAoV4szNJiqa1EYI2",
-  "avatar": "user_avatar_1579914092752.jpeg"
- },
- {
-  "id": 7,
-  "first_name": "Alex",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexcontrerasruiz@gmail.com",
-  "password": "$2b$10$pwwvoebFnM1pDwIrnUZ2wenp0VRwZ9x5es4MRKtCuEWrhm3JgYcoe",
-  "avatar": "user_avatar_1579914152482.jpeg"
- },
- {
-  "id": 8,
-  "first_name": "Alex",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexcontrerasruiz@gmail.com",
-  "password": "$2b$10$8iIQ/5xToRSkHeimZY26K.bGo50ZgNsLfnhGj2Jjz8M0Ll56ymw2S",
-  "avatar": "user_avatar_1579914243231.jpeg"
- },
- {
-  "id": 9,
-  "first_name": "Alex",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexcontrerasruiz@gmail.com",
-  "password": "$2b$10$8DwxmBKPPgq6vBAL40kcl.cwCrgFQjMw10O.7ZHR6DYSSlPEWa2Dy",
-  "avatar": "user_avatar_1579914343143.jpeg"
- },
- {
-  "id": 10,
-  "first_name": "Alexa",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexaila@outlook.com",
-  "password": "$2b$10$8.Nn3tjDeplTpltpXLC5r.lfPBE1ul.yunUEdMt1do6X8RpryBs6O",
-  "avatar": "user_avatar_1579914437678.jpeg"
- },
- {
-  "id": 11,
-  "first_name": "Alexa",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexaila@outlook.com",
-  "password": "$2b$10$nfahl6nh4v.m2vcCQzShN.CIqkk1OEHVCNsGvjRXnmLFOzVUubZqi",
-  "avatar": "user_avatar_1579914555797.jpeg"
- },
- {
-  "id": 12,
-  "first_name": "Alexa",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexaila@outlook.com",
-  "password": "$2b$10$u6xG7m4Pppv2Gm0W0MB58uNj8jOjw2ZkNw5ze.iljiyAwyakzslUK",
-  "avatar": "user_avatar_1579914610030.jpeg"
- },
- {
-  "id": 13,
-  "first_name": "",
-  "last_name": "Contreras",
-  "date": "1991-12-17",
-  "country": "VZ",
-  "city": "CABA",
-  "email": "alexaila@outlook.com",
-  "password": "$2b$10$G5clW0/WZ4oeQB0PYe12SeUxxgM2Gob8gG5z0hqvHYC/dY1Wpm7tS",
-  "avatar": "user_avatar_1579914683629.jpeg"
+  "first_name": "glayne",
+  "last_name": "leon",
+  "date": "1990-01-01",
+  "country": "AR",
+  "city": "caba",
+  "email": "glayneleon@gmail.com",
+  "password": "$2b$10$vhl2RXouclxuOgevM.n4zOJAGWLoZ9jal19jUqP7zj0pMwi9xnhz6",
+  "avatar": "user_avatar_1580150369396.png"
  }
 ]

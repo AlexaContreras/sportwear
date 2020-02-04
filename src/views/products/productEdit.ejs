@@ -1,0 +1,110 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<div class="addBody">
+    <h1 class="titleAdd">EDITAR PRODUCTO</h1>
+    <form action="/products/edit/<%= product.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Nombre del producto:</label class"col-12">
+                <input class="col-12" type="text" name="name" value="<%= product.name %>">
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Precio del producto:</label>
+                <input class="col-12" type="text" name="price" value="<%= product.price %>">
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Descripción del producto:</label>
+                <textarea class="col-12" name="description" placeholder="<%= product.description %>"></textarea>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Color:</label>
+                <select class="col-12" name="colors" multiple>
+                    <option value="">Seleccione los colores</option>
+                    <% colors.forEach(color => { %>
+                    <%  if(color.id == product.colors) { %>
+                    <option value="<%=color.id%>" selected/><%=color.name%> </option>
+                   <% } else {%>
+                    <option value="<%=color.id%>" /> <%=color.name%> </option>
+
+                    <% } %>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Talle:</label>
+                <select class="col-12 add" name="sizes" multiple>
+                    <option value="">Seleccione un Talle</option>
+                    <<% sizes.forEach(size => { %> <option value="<%=size.id%>"
+                        <%= product.size == size.id ? "selected" : "" %> /><%=size.name%></option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Categoria:</label>
+                <select class="col-12 add" name="category_id">
+                    <option value="">Seleccione Categoria</option>
+                    <% categories.forEach(category => { %>
+                    <%  if(category.id == product.category_id) { %>
+                    <option value="<%=category.id%>" selected/><%=category.name%> </option>
+                   <% } else {%>
+                    <option value="<%=category.id%>" /> <%=category.name%> </option>
+
+                    <% } %>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Tipo de producto:</label>
+                <select class="col-12 add" name="type_id">
+                    <% types.forEach(type => { %>
+                        <%  if(type.id == product.type_id) { %>
+                        <option value="<%=type.id%>" selected/><%=type.name%> </option>
+                       <% } else {%>
+                        <option value="<%=type.id%>" /> <%=type.name%> </option>
+    
+                        <% } %>
+                        <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Status:</label>
+                <select class="col-12 add" name="status">
+                    <<% status.forEach(statu => { %>
+                        <%  if(statu.id == product.status_id) { %>
+                        <option value="<%=statu.id%>" selected/><%=statu.name%> </option>
+                       <% } else {%>
+                        <option value="<%=statu.id%>" /> <%=statu.name%> </option>
+    
+                        <% } %>
+                        <% }) %>
+
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd examinar">
+                <label class="col-12 examinar">SUBIR IMAGÉN</label>
+                <input class="col-12 examinar" type="file" name="avatar">
+            </p>
+        </div>
+        <button class="botonAdd" type="submit">Editar</button>
+    </form>
+</div>
+
+</body>
+<%- include('../partials/footer') %>

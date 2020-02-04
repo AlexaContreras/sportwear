@@ -1,58 +1,40 @@
 const fs = require('fs');
 const path = require('path');
-
-const productFilePath = path.join(__dirname, '/../data/products.json');
-let productsContent = fs.readFileSync(productFilePath, 'utf-8');
-
-function getProducts() {
-    let productsContent = fs.readFileSync(productFilePath, 'utf-8');
-    let finalProducts = productsContent == '' ? [] : JSON.parse(productsContent);
-    return finalProducts;
-}
-
-function storeProduct(newProduct) {
-    let allProducts = getProducts();
-    allProducts.push(newProduct);
-    fs.writeFileSync(productFilePath, JSON.stringify(allProducts, null, ' '));
-}
-
-function generateProductId() {
-    let allProducts = getProducts();
-    if (allProducts.length == 0) {
-        return 1;
-    }
-
-    let lastProduct = allProducts.pop();
-    return lastProduct.id + 1;
-}
-
-function getProductById(id) {
-    let allProducts = getProducts();
-    let productToFind = allProducts.find(product => product.id == id);
-    return productToFind;
-}
+const db = require('../database/models');
 
 let productController = {
-    /*
-        Como ahora las variables isLogged y userLogged están en res.locals,
-        aquí ya no es necesario ni generar esas variables, ni pasar las mismas
-        a la vista al momento de res.render.
-        Idem para todos los métodos
-    */
+
     productDetail: (req, res) => {
-        let productFind = getProductById(req.params.id);
-        const colors = require('../data/colors.json')
-        res.render('productDetail', {
-            productFind: productFind,
-            title: 'Detail',
-            bodyName: 'detail',
-            colors
-        })
+        db.Products
+            .findByPk(req.params.id, {
+                include: [{
+                    association: 'brand'
+                }, {
+                    association: 'category'
+                }, {
+                    association: 'status'
+                }, {
+                    association: 'type'
+                }, {
+                    association: 'colors'
+                }, {
+                    association: 'sizes'
+                }]
+            })
+            .then(product => {
+
+                return res.render('products/productDetail', {
+                    product,
+                    title: 'Detalle',
+                    bodyName: 'detail'
+                });
+            })
+            .catch(error => console.log(error));
 
     },
 
     productCart: (req, res) => {
-        res.render('productCart', {
+        res.render('products/productCart', {
             title: 'Product cart',
             bodyName: 'cart',
         })
@@ -60,101 +42,281 @@ let productController = {
     },
 
     productShow: (req, res) => {
-        res.render('productAdd', {
-            title: 'Product Add',
-            bodyName: 'add',
-        })
+        let productColors = db.Colors.findAll();
+        let productTypes = db.Types.findAll();
+        let productCategoties = db.Categories.findAll();
+        let productBrand = db.Brands.findAll();
+        let productSize = db.Sizes.findAll();
+        let productStatus = db.Status.findAll();
+
+        Promise.all([productColors, productTypes, productCategoties, productBrand, productSize, productStatus])
+            .then(([colors, types, categories, brands, sizes, status]) => {
+
+                res.render('products/productAdd', {
+                    colors,
+                    types,
+                    categories,
+                    brands,
+                    sizes,
+                    status,
+                    title: 'Añadir producto',
+                    bodyName: 'add'
+                })
+            }).catch(error => console.log(error))
 
     },
 
-    productAdd: (req, res, next) => {
-        let newAddProduct = {
-            id: generateProductId(),
-            name: req.body.productName,
-            price: req.body.productPrice,
-            description: req.body.productDescription,
-            category: req.body.category,
-            type: req.body.type,
-            color: req.body.color,
-            size: req.body.size,
-            status: req.body.status,
-            avatar: req.file.filename,
-        };
+    productAdd: (req, res) => {
+        req.body.avatar = req.file.filename
+        db.Products
+            .create(req.body)
+            .then(productSaved => {
+                console.log(productSaved);
 
-        storeProduct(newAddProduct);
+                let colors = req.body.colors;
+                for (const oneColor of colors) {
+                    // 	// Guardar en la tabla pivot colorProducts
+                    db.ColorProducts
+                        .create({
+                            product_id: productSaved.id,
+                            color_id: oneColor
+                        }).catch(error => console.log(error));
+                }
 
-        return res.redirect('/');
+                let sizes = req.body.sizes;
+                for (const oneSize of sizes) {
+                    // 	// Guardar en la tabla pivot sizesProducts
+                    db.SizeProducts
+                        .create({
+                            product_id: productSaved.id,
+                            size_id: oneSize
+                        }).catch(error => console.log(error));
+                }
+
+                res.redirect('/');
+
+            })
+            .catch(error => console.log(error));
+
+
     },
 
     deleteProduct: (req, res) => {
-        let products = getProducts();
-        let productosSinElQueBorramos = products.filter(function (unProducto) {
-            return unProducto.id != req.params.id;
+        db.ColorProducts.destroy({
+            where: {
+                product_id: req.params.id
+            }
+        }).then(product => {
+            db.SizeProducts.destroy({
+                where: {
+                    product_id: req.params.id
+                }
+            }).then(product => {
+                db.Products.destroy({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+            }).catch(error => console.log(error))
         })
-        // guardo el array con los productos finales
-        fs.writeFileSync(productFilePath, JSON.stringify(productosSinElQueBorramos, null, ' '));
-        res.redirect('/');
+
+        res.redirect('/')
+
+
     },
 
     editProductShow: (req, res) => {
-        /* let colors = [
-            "Negro", "Blanco", "Gris", "Azul", "Verde", "Rojo", "Naranja", "Bordo", "Rosa", "Celeste", "Natural", "Fucsia", "Lila", "Mostaza"
-        ] */
-        /* let colorFound = colors.filter(color => color != productFind.color);
-        let colorSolo = colors.filter(color => color == productFind.color);
-        let colorFinal = [...colorSolo, ...colorFound] */
-        let productFind = getProductById(req.params.id);
-        const colors = require('../data/colors.json');
-        const sizes = require ('../data/sizes.json');
-        const categories = require('../data/categories.json');
-        const typesOfProducts = require('../data/typesOfProducts.json');
-        const status = require('../data/status.json');
-      
-        res.render('productEdit', {
-            productFind: productFind,
-            title: 'Edit',
-            bodyName: 'edit',
-            colors,
-            sizes,
-            categories,
-            typesOfProducts,
-            status
-        })
+        let productFind = db.Products.findByPk(req.params.id)
+        let productColors = db.Colors.findAll();
+        let productTypes = db.Types.findAll();
+        let productCategoties = db.Categories.findAll();
+        let productBrand = db.Brands.findAll();
+        let productSize = db.Sizes.findAll();
+        let productStatus = db.Status.findAll();
+
+        Promise.all([productFind, productColors, productTypes, productCategoties, productBrand, productSize, productStatus])
+            .then(([product, colors, types, categories, brands, sizes, status]) => {
+                
+                res.render('products/productEdit', {
+                    product,
+                    colors,
+                    types,
+                    categories,
+                    brands,
+                    sizes,
+                    status,
+                    title: 'Edit',
+                    bodyName: 'edit'
+                })
+            }).catch(error => console.log(error))
+
+
     },
 
     editProduct: (req, res) => {
-        let products = getProducts();
-        let productId = parseInt(req.params.id); //router.put('/productEdit/:id'
-
-        //inicializo la variable a almacenar
-        let productFound;
-
-        //recorro el array
-        products.map(product => {
-
-            //pregunto si el id que recibo es igual al id del producto 
-            if (product.id === productId) {
-
-                //reasigno las propiedades del producto con lo que viene del form (req.body)
-                product.nombre = req.body.productName,
-                    product.precio = req.body.productPrice,
-                    product.descripcion = req.body.productDescription,
-                    product.categoria = req.body.category,
-                    product.tipo = req.body.type,
-                    product.color = req.body.color,
-                    product.talle = req.body.size,
-                    product.status = req.body.status,
-                    product.avatar = req.file.filename
-
-                // //asigno el valor a la variable inicializada
+        req.body.avatar = req.file.filename
+        db.Products
+            .update(req.body, {
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then( ()=>{
+                let colors = req.body.colors;
+            for (const oneColor of colors) {
+                // 	// Guardar en la tabla pivot colorProducts
+                db.ColorProducts
+                    .update({
+                        product_id: req.params.id,
+                        color_id: oneColor
+                    }, {
+                        where: {
+                         id: req.params.id
+                        }
+                        
+                    }).catch(error => console.log(error));
             }
-            productFound = products;
-        });
-        fs.writeFileSync(productFilePath, JSON.stringify(productFound, null, ' '));
+        }).then(() => {
+            let sizes = req.body.sizes;
+            for (const oneSize of sizes) {
+                // 	// Guardar en la tabla pivot sizesProducts
+                db.SizeProducts
+                    .update({
+                        product_id: req.params.id,
+                        size_id: oneSize
+                    },
+                    {
+                        where: {
+                            id: req.params.id
+                        }
+                       
+                    }).catch(error => console.log(error))
+    }
+    res.redirect('/');
 
+})
+    },
+    men: (req, res) => {
+        db.Products
+            .findAll({
+                include: ['brand', 'category', 'status', 'type']
+            })
+            .then(products => {
+                return res.render('productViews/men', {
+                    products,
+                    title: 'Hombres',
+                    bodyName: 'hombre'
+                });
+            })
+            .catch(error => console.log(error));
     },
 
-    
+    women: (req, res) => {
+        db.Products
+            .findAll({
+                include: ['brand', 'category', 'status', 'type']
+            })
+            .then(products => {
+                return res.render('productViews/women', {
+                    products,
+                    title: 'Mujeres',
+                    bodyName: 'mujer'
+                });
+            })
+            .catch(error => console.log(error));
+    },
+
+    kids: (req, res) => {
+        db.Products
+            .findAll({
+                include: ['brand', 'category', 'status', 'type']
+            })
+            .then(products => {
+                return res.render('productViews/kids', {
+                    products,
+                    title: 'Nenes',
+                    bodyName: 'nenes'
+                });
+            })
+            .catch(error => console.log(error));
+    },
+
+    new: (req, res) => {
+        db.Products
+            .findAll({
+                include: ['brand', 'category', 'status', 'type']
+            })
+            .then(products => {
+                return res.render('productViews/new', {
+                    products,
+                    title: 'New',
+                    bodyName: 'new'
+                });
+            })
+            .catch(error => console.log(error));
+    },
+
+    sale: (req, res) => {
+        db.Products
+            .findAll({
+                include: ['brand', 'category', 'status', 'type']
+            })
+            .then(products => {
+                return res.render('productViews/sale', {
+                    products,
+                    title: 'Sale',
+                    bodyName: 'sale'
+                });
+            })
+            .catch(error => console.log(error));
+    },
+
+
+    shoes: (req, res) => {
+        db.Products
+            .findAll({
+                include: ['brand', 'category', 'status', 'type']
+            })
+            .then(products => {
+                return res.render('productViews/shoes', {
+                    products,
+                    title: 'Calzados',
+                    bodyName: 'bodyCalzado'
+                });
+            })
+            .catch(error => console.log(error));
+    },
+
+    clothes: (req, res) => {
+        db.Products
+            .findAll({
+                include: ['brand', 'category', 'status', 'type']
+            })
+            .then(products => {
+                return res.render('productViews/clothes', {
+                    products,
+                    title: 'Indumentaria',
+                    bodyName: 'bodyIndumentaria'
+                });
+            })
+    },
+
+    accesories: (req, res) => {
+        db.Products
+            .findAll({
+                include: ['brand', 'category', 'status', 'type']
+            })
+            .then(products => {
+                return res.render('productViews/accesories', {
+                    products,
+                    title: 'Accesorios',
+                    bodyName: 'bodyAccesorios'
+                });
+            })
+            .catch(error => console.log(error));
+    },
+
+
 };
 
 module.exports = productController;

@@ -14,7 +14,7 @@ const { check, validationResult , body } = require('express-validator');
 
 const storageDiskUser = multer.diskStorage({
 	destination: (req, file, cb) => {
-        cb(null, __dirname + '/../public/images/avatarsUsers');
+        cb(null, __dirname + '/../../public/images/avatarsUsers');
         
 	},
 	filename: (req, file, cb) => {

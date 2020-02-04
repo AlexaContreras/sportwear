@@ -1,14 +1,38 @@
 [
  {
   "id": 1,
-  "name": "Shoes",
-  "price": "$999",
-  "description": "Este buzo te permite presumir de estilo incluso en los días más fríos. Está confeccionado en felpa suave con los puños y el dobladillo acanalados para mantenerlo en su lugar en todo momento. Un estampado minimalista de adidas Skateboarding en el frente remata el look.",
-  "category": "2",
-  "type": "2",
-  "color": "1",
-  "size": "2",
+  "name": "Top Nike",
+  "price": "$1499",
+  "description": "Este top deportivo es perfecto para realizar circuitos de entrenamiento o para tus aventuras de fin de semana en la montaña. Está confeccionado en un tejido transpirable de secado rápido que te mantiene fresca y seca durante todo el entrenamiento. Las copas removibles aportan una mayor cobertura y un mejor ajuste.",
+  "category": "1",
+  "type": "1",
+  "color": "10",
+  "size": "1",
   "status": "1",
-  "avatar": "product_avatar_1579904564651.png"
+  "avatar": "product_avatar_1579965367585.png"
+ },
+ {
+  "id": 2,
+  "name": "Campera",
+  "price": "$2999",
+  "description": "En los momentos intensos justo antes de comenzar empezar el partido, todo es posible. Esta campera de fútbol se inspira en la que visten los jugadores de River Plate al salir del túnel de vestuarios. Está confeccionada en sarga resistente e incluye un forro de piqué, luce un ribete con el nombre del club a lo largo de las mangas y el escudo bordado en el pecho.",
+  "category": "3",
+  "type": "1",
+  "color": "5",
+  "size": "1",
+  "status": "2",
+  "avatar": "product_avatar_1579965666027.png"
+ },
+ {
+  "id": 3,
+  "name": "Campera adidas",
+  "price": "$1499",
+  "description": "En los momentos intensos justo antes de comenzar empezar el partido, todo es posible. Esta campera de fútbol se inspira en la que visten los jugadores de River Plate al salir del túnel de vestuarios. Está confeccionada en sarga resistente e incluye un forro de piqué, luce un ribete con el nombre del club a lo largo de las mangas y el escudo bordado en el pecho.",
+  "category": "2",
+  "type": "1",
+  "color": "15",
+  "size": "1",
+  "status": "1",
+  "avatar": "product_avatar_1579966096081.png"
  }
 ]

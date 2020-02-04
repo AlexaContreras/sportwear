@@ -1,0 +1,101 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<div class="addBody">
+    <h1 class="titleAdd">CREA UN PRODUCTO</h1>
+    <form action="/products/add" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Nombre del producto:</label class"col-12">
+                <input class="col-12" type="text" name="name">
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Precio del producto:</label>
+                <input class="col-12" type="text" name="price">
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Descripción del producto:</label>
+                <textarea class="col-12" name="description"></textarea>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Marca:</label>
+                <select class="col-12" name="brand_id">
+                    <option value="">Elegí una marca</option>
+                    <% brands.forEach(oneBrand => { %>
+                    <option value="<%= oneBrand.id %>"> <%= oneBrand.name %> </option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Colores:</label>
+                <select class="col-12" name="colors" multiple>
+                    <option value="">Elegí un color</option>
+                    <% colors.forEach(oneColor => { %>
+                    <option value="<%= oneColor.id %>"> <%= oneColor.name %> </option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Talles:</label>
+                <select class="col-12" name="sizes" multiple>
+                    <option value="">Elegí un talle</option>
+                    <% sizes.forEach(oneSize => { %>
+                    <option value="<%= oneSize.id %>"> <%= oneSize.name %> </option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Categoria:</label>
+                <select class="col-12" name="category_id">
+                    <option value="">Elegí una categoria</option>
+                    <% categories.forEach(oneCategory => { %>
+                    <option value="<%= oneCategory.id %>"> <%= oneCategory.name %> </option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Tipo de producto:</label>
+                <select class="col-12" name="type_id">
+                    <option value="">Elegí un tipo</option>
+                    <% types.forEach(oneType => { %>
+                    <option value="<%= oneType.id %>"> <%= oneType.name %> </option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Status:</label>
+                <select class="col-12" name="status_id">
+                    <option value="">Elegí un status</option>
+                    <% status.forEach(oneStatus => { %>
+                    <option value="<%= oneStatus.id %>"> <%= oneStatus.name %> </option>
+                    <% }) %>
+                </select>
+            </p>
+        </div>
+        <div class="row">
+            <p class="pAdd examinar">
+                <label class="col-12 examinar">SUBIR IMAGÉN</label>
+                <input class="col-12 examinar" type="file" name="avatar">
+            </p>
+        </div>
+        <button class="botonAdd" type="submit">Crear producto</button>
+    </form>
+</div>
+
+</body>
+<%- include('../partials/footer') %>

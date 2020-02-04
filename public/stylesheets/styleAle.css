@@ -316,6 +316,17 @@ body.register {
   font-size: .8em;
 
 }
+ul.validator{
+  padding: 0;
+  background-color: rgb(245, 245, 86);;
+  text-align: center;
+  padding: 15px;
+}
+
+ul.validator li{
+ 
+  text-transform: uppercase;
+}
 
 div.registerBody {
   margin: 2em;
@@ -378,6 +389,9 @@ div.registerBody select {
 }
 
 div.div-register {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 20px;
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -453,17 +467,26 @@ div.div-detail p {
   font-size: .8em;
 }
 
-div.div-detail-content p {
+div.div-detail-content p, div.div-detail-content h2 {
+  text-align: center;
+  font-size: 1em;
+}
+div.div-detail-content h2.display-sm {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+ div.div-detail h2.display-sm{
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+}
+div.div-detail p.display-sm {
   text-align: center;
   font-size: .8em;
 }
 
-div.div-detail-content h2 {
-  text-align: center;
-  font-size: 1.5em;
-}
-
-div.div-detail-content p.descripcion {
+div.div-detail-content div.descripcion p{
   margin: 15px;
   text-align: justify;
 }
@@ -472,9 +495,12 @@ div.div-detail-content {
   min-height: 300px;
 }
 
+
 div.div-detail-content .display-sm {
   display: none;
 }
+
+
 
 button.btn-detail {
   display: block;
@@ -490,56 +516,63 @@ div.description {
   text-align: center;
 }
 
-p.center i.gris {
+p.center i.Gris {
   color: #ccc;
 }
 
-p.center i.celeste {
+p.center i.Celeste {
   color: rgb(91, 195, 187);
 }
 
-p.center i.azul {
+p.center i.Azul {
   color: rgb(17, 19, 141);
 }
 
-p.center i.verde {
+p.center i.Verde {
   color: rgb(46, 167, 72);
 }
 
-p.center i.rojo {
+p.center i.Rojo {
   color: rgb(226, 40, 40);
 }
 
-p.center i.amarillo {
+p.center i.Amarillo {
   color: rgba(255, 238, 0, 0.74);
 }
 
-p.center i.naranja {
+p.center i.Naranja {
   color: rgb(245, 134, 7);
 }
 
-p.center i.bordo {
+p.center i.Bordo {
   color: rgb(104, 12, 12);
 }
 
-p.center i.rosa {
+p.center i.Rosa {
   color: rgb(241, 201, 201);
 }
 
-p.center i.natural {
+p.center i.Natural {
   color: rgb(228, 233, 160);
 }
 
-p.center i.fucsia {
+p.center i.Fucsia {
   color: rgb(236, 6, 129);
 }
 
-p.center i.lila {
+p.center i.Lila {
   color: rgb(174, 91, 195);
 }
 
-p.center i.mostaza {
+p.center i.Mostaza {
   color: rgb(216, 176, 0);
+}
+p.center i.Negro {
+  color: rgb(2, 2, 2)
+}
+p.center i.Blanco {
+  color: rgb(80, 78, 78)
+  
 }
 
 label div.talle {
@@ -555,11 +588,17 @@ label div.talle {
 
 }
 
-div.talleIndumentaria,
-div.talleCalzado {
+div.talle{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+div.size{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 div.progress-bars {
@@ -921,7 +960,7 @@ button.profile-button{
   /*REGISTER*/
   div.registerBody input.register,
   div.registerBody select {
-    width: 400px;
+    width: 800px;
   }
 
   /*DETAIL*/
@@ -1060,7 +1099,8 @@ button.profile-button{
   }
 
   div.carousel-title h1 {
-    font-size: 1.5em;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5em;
     font-weight: bold;
   }
 
@@ -1094,6 +1134,13 @@ button.profile-button{
   margin: 15px 5px;
   padding: 5px;
 }
+  /*REGISTER*/
+
+  div.div-register {
+    font-size: 35px;  
+  }
+
+
  /*PROFILE*/
  h2.profile-name-2{
    display: block;
@@ -1185,13 +1232,13 @@ div.profile{
   }
 
   .a-lifestyle-desk {
-    font-family: 'Asap', sans-serif;
+    font-family: 'Bebas Neue', cursive;
     text-align: center;
     width: 100%;
     display: inline-flex;
     align-items: center;
     color: black;
-    font-size: 2.5em;
+    font-size: 3.5em;
     padding: 20px;
 
   }
@@ -1252,6 +1299,7 @@ div.profile{
   /*DETAIL*/
   div.div-detail-content .display-sm {
     display: block;
+    
   }
 
   div.div-detail .display-sm {
