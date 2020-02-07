@@ -18,22 +18,33 @@
         <div class="row">
             <p class="pAdd">
                 <label class="col-12">Descripción del producto:</label>
-                <textarea class="col-12" name="description" placeholder="<%= product.description %>"></textarea>
+                <textarea class="col-12" name="description"><%= product.description %></textarea>
             </p>
         </div>
+
+
+
         <div class="row">
             <p class="pAdd">
+                
                 <label class="col-12">Color:</label>
+                
                 <select class="col-12" name="colors" multiple>
                     <option value="">Seleccione los colores</option>
-                    <% colors.forEach(color => { %>
-                    <%  if(color.id == product.colors) { %>
-                    <option value="<%=color.id%>" selected/><%=color.name%> </option>
-                   <% } else {%>
-                    <option value="<%=color.id%>" /> <%=color.name%> </option>
-
+                    <% let isOk = false; %> 
+                    <% for(let i = 0; i < colors.length; i++) { %> 
+                        <% for(let j = 0; j < product.colors.length; j++ ) { %>
+                            <% if (product.colors[j].id == colors[i].id) { %>
+                                <% isOk = true; break;  %> 
+                            <% } else { %>
+                                <% isOk = false; %> 
+                            <% } %>
+                        <% } %>
+                        <option 
+                            value="<%=colors[i].id%>"
+                            <%= isOk ? 'selected' : null %>
+                        ><%=colors[i].name%> </option>
                     <% } %>
-                    <% }) %>
                 </select>
             </p>
         </div>

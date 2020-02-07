@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const db = require('../database/models');
+const sq = db.sequelize;
 
 let productController = {
 
@@ -126,7 +127,7 @@ let productController = {
     },
 
     editProductShow: (req, res) => {
-        let productFind = db.Products.findByPk(req.params.id)
+        let productFind = db.Products.findByPk(req.params.id, { include: ['colors']})
         let productColors = db.Colors.findAll();
         let productTypes = db.Types.findAll();
         let productCategoties = db.Categories.findAll();
@@ -136,7 +137,6 @@ let productController = {
 
         Promise.all([productFind, productColors, productTypes, productCategoties, productBrand, productSize, productStatus])
             .then(([product, colors, types, categories, brands, sizes, status]) => {
-                
                 res.render('products/productEdit', {
                     product,
                     colors,
@@ -153,49 +153,47 @@ let productController = {
 
     },
 
-    editProduct: (req, res) => {
-        req.body.avatar = req.file.filename
-        db.Products
+    editProduct: async (req, res) => {
+
+        let productEdited = await db.Products
             .update(req.body, {
                 where: {
                     id: req.params.id
                 }
-            })
-            .then( ()=>{
-                let colors = req.body.colors;
-            for (const oneColor of colors) {
-                // 	// Guardar en la tabla pivot colorProducts
-                db.ColorProducts
-                    .update({
-                        product_id: req.params.id,
-                        color_id: oneColor
-                    }, {
-                        where: {
-                         id: req.params.id
-                        }
-                        
-                    }).catch(error => console.log(error));
-            }
-        }).then(() => {
-            let sizes = req.body.sizes;
-            for (const oneSize of sizes) {
-                // 	// Guardar en la tabla pivot sizesProducts
-                db.SizeProducts
-                    .update({
-                        product_id: req.params.id,
-                        size_id: oneSize
-                    },
-                    {
-                        where: {
-                            id: req.params.id
-                        }
-                       
-                    }).catch(error => console.log(error))
-    }
-    res.redirect('/');
+            });
 
-})
+            await db.Products
+            .findByPk(req.params.id, {
+                include: [ {
+                    association: 'colors'
+                }]
+            }).then(productFound =>{
+                let colors = productFound.colors;
+                
+                colors.map(eachColor => {
+                    sq
+                        .query(`DELETE FROM colorProducts WHERE product_id = ${productFound.id} AND color_id = ${eachColor.id}`)
+                        .then(() => console.log("Todo ok")) 
+                        .catch(error => console.log(error));
+                });
+
+                let colorsToSave = req.body.colors;
+
+                colorsToSave.forEach(async oneColor => {
+                    await db.ColorProducts
+                        .create({
+                            product_id: req.params.id,
+                            color_id: oneColor
+                        }) 
+                        .catch(error => console.log(error));
+                })
+
+                return res.redirect('/');
+            })
+
+        
     },
+
     men: (req, res) => {
         db.Products
             .findAll({
