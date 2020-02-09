@@ -382,7 +382,7 @@ button.boton-register:hover {
   opacity: 0.8;
 }
 div.examinar{
-  margin: 10px 0 10px ;
+  margin: 10px 0 30px ;
   background-color: rgb(245, 245, 86);
   padding: 10px  !important;
   width: 180px;
@@ -391,10 +391,20 @@ div.examinar{
 div.invalid-feedback {
   margin: 0 0 10px 15px;
 }
+div.avatar-error{
+  position: absolute;
+  font-size: 80%;
+  color: #dc3545;
+  margin:  70px 0 20px 15px;
+}
+div.error-msg{
+  text-transform: uppercase;
+  color: #dc3545;
+
+}
 div.registerBody input.register,
 div.registerBody select {
   width: 82vw;
-
 }
 
 div.div-register {
