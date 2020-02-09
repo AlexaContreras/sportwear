@@ -8,19 +8,7 @@ let productController = {
     productDetail: (req, res) => {
         db.Products
             .findByPk(req.params.id, {
-                include: [{
-                    association: 'brand'
-                }, {
-                    association: 'category'
-                }, {
-                    association: 'status'
-                }, {
-                    association: 'type'
-                }, {
-                    association: 'colors'
-                }, {
-                    association: 'sizes'
-                }]
+                include: ['brand', 'category', 'sizes', 'colors']
             })
             .then(product => {
 
@@ -72,7 +60,6 @@ let productController = {
         db.Products
             .create(req.body)
             .then(productSaved => {
-                console.log(productSaved);
 
                 let colors = req.body.colors;
                 for (const oneColor of colors) {
@@ -127,7 +114,7 @@ let productController = {
     },
 
     editProductShow: (req, res) => {
-        let productFind = db.Products.findByPk(req.params.id, { include: ['colors']})
+        let productFind = db.Products.findByPk(req.params.id, { include: ['colors', 'sizes']})
         let productColors = db.Colors.findAll();
         let productTypes = db.Types.findAll();
         let productCategoties = db.Categories.findAll();
@@ -155,6 +142,7 @@ let productController = {
 
     editProduct: async (req, res) => {
 
+        req.body.avatar = req.file.filename;
         let productEdited = await db.Products
             .update(req.body, {
                 where: {
@@ -165,10 +153,11 @@ let productController = {
             await db.Products
             .findByPk(req.params.id, {
                 include: [ {
-                    association: 'colors'
-                }]
+                    association: 'colors', 
+                }, {association: 'sizes'}]
             }).then(productFound =>{
                 let colors = productFound.colors;
+                let sizes = productFound.sizes;
                 
                 colors.map(eachColor => {
                     sq
@@ -176,8 +165,15 @@ let productController = {
                         .then(() => console.log("Todo ok")) 
                         .catch(error => console.log(error));
                 });
+                sizes.map(eachSize => {
+                    sq
+                        .query(`DELETE FROM sizeProducts WHERE product_id = ${productFound.id} AND size_id = ${eachSize.id}`)
+                        .then(() => console.log("Todo ok")) 
+                        .catch(error => console.log(error));
+                });
 
                 let colorsToSave = req.body.colors;
+                let sizesToSave = req.body.sizes
 
                 colorsToSave.forEach(async oneColor => {
                     await db.ColorProducts
@@ -187,6 +183,17 @@ let productController = {
                         }) 
                         .catch(error => console.log(error));
                 })
+
+                sizesToSave.forEach(async oneSize => {
+                    await db.SizeProducts
+                        .create({
+                            product_id: req.params.id,
+                            size_id: oneSize
+                        }) 
+                        .catch(error => console.log(error));
+                })
+
+
 
                 return res.redirect('/');
             })

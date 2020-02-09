@@ -1,0 +1,86 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+
+<div class="registerBody">
+   
+   <h1 class="title-register">EDICIÓN </h1>
+   <div class="registro">
+      <form action="/users/edit/<%= user.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+         <div class="sub-inputs">
+            <div class="row">
+               <p class="form-register">
+                  <label class="col-12 sinPadding " for="nombre">TU NOMBRE </label>
+                  <input class="col-12 register" type="text" name="first_name" id="nombre" value="<%= user.first_name %>">
+               </p>
+            </div>
+            <div class="row">
+               <p class="form-register">
+                  <label class="col-12 sinPadding " for="apellido">TU APELLIDO </label>
+                  <input class="col-12 register" type="text" name="last_name" id="apellido" value="<%= user.last_name %>">
+               </p>
+            </div>
+            <div class="row">
+               <p class="form-register">
+                  <label class="col-12 sinPadding " for="nacimiento">FECHA DE NACIMIENTO </label>
+                  <input class="col-12 date register" type="date" id="start" name="date" value="<%= user.date %>">
+               </p>
+            </div>
+            <div class="row">
+               <p class="form-register">
+                  <label class="col-12 sinPadding" for="pais">PAIS DE RESIDENCIA</label>
+                  <select class="col-12" name="country">
+                     <option value="">Elegí un país</option>
+                     <% countries.forEach(countrie => { %>
+                     <%  if(countrie.id == user.country_id) { %>
+                     <option value="<%=countrie.id%>" selected/><%=countrie.name%> </option>
+                    <% } else {%>
+                     <option value="<%=countrie.id%>" /> <%=countrie.name%> </option>
+ 
+                     <% } %>
+                     <% }) %>
+                 </select>
+               </p>
+            </div>
+            <div class="row">
+               <p class="form-register">
+                  <label class="col-12 sinPadding " for="city">CIUDAD DE RESIDENCIA</label>
+                  <input class="col-12 register" type="text" name="city" id="ciudad" value="<%= user.city %>">
+               </p>
+            </div>
+            <div class="row">
+               <p class="form-register">
+                  <label class="col-12 sinPadding" for="mail">CORREO ELECTRÓNICO</label>
+                  <input class="col-12 register" type="email" name="email" id="mail" value="<%=user.email%>">
+               </p>
+            </div>
+            <div class="row">
+               <p class="form-register">
+                  <label class="col-12 sinPadding" for="pass">CONTRASEÑA</label>
+                  <input class="col-12 register" type="password" name="password" id="pass">
+               </p>
+            </div>
+            <div class="row">
+               <p class="pAdd examinar">
+                   <label class="col-12 examinar">SUBIR IMAGÉN</label>
+                   <input class="col-12 examinar" type="file" name="avatar" value="<%= user.avatar %>">
+               </p>
+           </div>
+            <p>
+               <label class="check-register" for="cond"><input type="checkbox" name="cond" id="cond"> He leido y acepto
+                  los terminos y condiciones </label>
+            </p>
+         </div>
+         <p class=>
+            <label class="check-register" for="news"><input type="checkbox" name="news" id="news"> Me gustaria recibir
+             el newsletter con las novedades de SportwearClub </label>
+         </p>
+         <button type="submit" class="boton-register">ENVIAR</button>
+         <button type="reset" class="boton-register">BORRAR</button>
+      </form>
+   </div>
+</div>
+<div class="div-register">
+   <p><a href="/" class="footer-register"> SUSCRIBITE, ENTERATE DE LAS NOVEDADES Y DESCUENTOS</a></p>
+</div>
+<%- include('../partials/footer') %>

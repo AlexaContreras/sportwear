@@ -342,23 +342,23 @@ label.sinPadding {
   padding: 0 15px;
 }
 
-p.form-register select {
+div.form-register select {
   margin: 0 0 0 15px;
   padding: 10px;
   text-transform: uppercase;
 }
 
-p.form-register select option {
+div.form-register select option {
   padding: 10px;
   text-transform: uppercase;
 }
 
-p.form-register input.date {
+div.form-register input.date {
   padding: 10px;
   text-transform: uppercase;
 }
 
-p label.check-register {
+div label.check-register {
   text-transform: uppercase;
 
 }
@@ -381,7 +381,16 @@ button.boton-register {
 button.boton-register:hover {
   opacity: 0.8;
 }
-
+div.examinar{
+  margin: 10px 0 10px ;
+  background-color: rgb(245, 245, 86);
+  padding: 10px  !important;
+  width: 180px;
+  position: relative;
+}
+div.invalid-feedback {
+  margin: 0 0 10px 15px;
+}
 div.registerBody input.register,
 div.registerBody select {
   width: 82vw;

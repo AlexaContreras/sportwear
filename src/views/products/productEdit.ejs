@@ -51,11 +51,22 @@
         <div class="row">
             <p class="pAdd">
                 <label class="col-12">Talle:</label>
-                <select class="col-12 add" name="sizes" multiple>
-                    <option value="">Seleccione un Talle</option>
-                    <<% sizes.forEach(size => { %> <option value="<%=size.id%>"
-                        <%= product.size == size.id ? "selected" : "" %> /><%=size.name%></option>
-                    <% }) %>
+                <select class="col-12" name="sizes" multiple>
+                    <option value="">Seleccione los talles</option>
+                    <% let isOk1 = false; %> 
+                    <% for(let i = 0; i < sizes.length; i++) { %> 
+                        <% for(let j = 0; j < product.sizes.length; j++ ) { %>
+                            <% if (product.sizes[j].id == sizes[i].id) { %>
+                                <% isOk1 = true; break;  %> 
+                            <% } else { %>
+                                <% isOk1 = false; %> 
+                            <% } %>
+                        <% } %>
+                        <option 
+                            value="<%=sizes[i].id%>"
+                            <%= isOk1 ? 'selected' : null %>
+                        ><%=sizes[i].name%> </option>
+                    <% } %>
                 </select>
             </p>
         </div>

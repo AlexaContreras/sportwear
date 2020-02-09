@@ -14,11 +14,17 @@
         </div>
         <div class="row">
             <div class="col-12 col-sm-12">
-                <form>
+                
                     <h2 class="profile-name-2"> Hola <%= userLogged.first_name %> </h2>
                     <input class="profile-input" type="text" value="<%= userLogged.email %>">
-                    <button class="profile-button" type="submit">Actualizar datos</button>
-                </form>
+
+
+                    <form action="/users/edit/<%= userLogged.id%>">
+                        <button type="submit" class="btn-detail">ACTUALIZAR DATOS</button>
+                    </form>
+                    <form action="/users/delete/<%= userLogged.id%>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn-detail">BORRAR USUARIO</button>
+                     </form>
 
             </div>
         </div>

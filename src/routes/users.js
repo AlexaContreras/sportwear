@@ -41,5 +41,9 @@ router.get('/login', guestMiddleware, userController.login);
 router.post('/login', userController.procesarLogin);
 router.get('/profile',autenticarMiddleware ,userController.profile);
 router.get('/logout', userController.logout);
+router.get('/edit/:id', userController.editShow);
+router.put('/edit/:id',uploadUser.single('avatar') , userController.editUser);
+router.delete('/delete/:id', userController.delete);
+
 
 module.exports = router;

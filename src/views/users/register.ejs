@@ -3,85 +3,79 @@
 
 
 <div class="registerBody">
-   <% if (typeof errors != 'undefined'){ %>
 
-      <ul class="validator">
-         <% errors.forEach(error => { %>
-            <li class="validator"> <%= error.msg %></li>
-         <% }) %>
-      </ul>
-      
-      <% } %>
    <h1 class="title-register">REGISTRATE</h1>
    <div class="registro">
-      <form action="/users/register" method="POST" enctype="multipart/form-data">
+      <form class="user" action="/users/register" method="POST" enctype="multipart/form-data">
          <div class="sub-inputs">
             <div class="row">
-               <p class="form-register">
+               <div class="form-register">
                   <label class="col-12 sinPadding " for="nombre">TU NOMBRE </label>
-                  <input class="col-12 register" type="text" name="first_name" id="nombre">
-               </p>
+                  <input class="col-12 register" type="text" name="first_name" id="nombre" data-name="nombre">
+                  <div class="invalid-feedback"> </div>
+               </div>
+                  
             </div>
             <div class="row">
-               <p class="form-register">
+               <div class="form-register">
                   <label class="col-12 sinPadding " for="apellido">TU APELLIDO </label>
-                  <input class="col-12 register" type="text" name="last_name" id="apellido">
-               </p>
+                  <input class="col-12 register" type="text" name="last_name" id="apellido" data-name="apellido">
+                  <div class="invalid-feedback"> </div>
+               </div>
             </div>
             <div class="row">
-               <p class="form-register">
+               <div class="form-register">
                   <label class="col-12 sinPadding " for="nacimiento">FECHA DE NACIMIENTO </label>
-                  <input class="col-12 date register" type="date" id="start" name="date">
-               </p>
+                  <input class="col-12 date register" type="date" id="start" name="date" data-name="fecha de nacimiento">
+                  <div class="invalid-feedback"></div>
+               </div>
             </div>
             <div class="row">
-               <p class="form-register">
+               <div class="form-register">
                   <label class="col-12 sinPadding" for="pais">PAIS DE RESIDENCIA</label>
-                  <select class="col-12" name="country">
-                     <option value="AR"> Argentina</option>
-                     <option value="BO">Bolivia</option>
-                     <option value="BR">Brasil</option>
-                     <option value="CL">Chile</option>
-                     <option value="Colombia">Colombia</option>
-                     <option value="EC">Ecuador</option>
-                     <option value="MX">Mexico</option>
-                     <option value="PY"> Paraguay</option>
-                     <option value="UY"> Uruguay</option>
-                     <option value="VZ">Venezuela</option>
-                     <option value="OTH">Otros</option>
-                  </select>
-               </p>
+                  <select class="col-12" name="country_id" data-name="país de residencia">
+                        <option value="">Elegí un país</option>
+                        <% countries.forEach(oneCountry => { %>
+                        <option value="<%= oneCountry.id %>"> <%= oneCountry.name %> </option>
+                        <% }) %>
+                    </select>
+                    <div class="invalid-feedback"> </div>
+               </div>
             </div>
             <div class="row">
-               <p class="form-register">
+               <div class="form-register">
                   <label class="col-12 sinPadding " for="city">CIUDAD DE RESIDENCIA</label>
-                  <input class="col-12 register" type="text" name="city" id="ciudad">
-               </p>
+                  <input class="col-12 register" type="text" name="city" id="ciudad" data-name="cuidad de residencia">
+                  <div class="invalid-feedback"> </div>
+               </div>
             </div>
             <div class="row">
-               <p class="form-register">
+               <div class="form-register">
                   <label class="col-12 sinPadding" for="mail">CORREO ELECTRÓNICO</label>
-                  <input class="col-12 register" type="email" name="email" id="mail">
-               </p>
+                  <input class="col-12 register" type="email" name="email" id="mail" data-name="correo eléctronico">
+                  <div class="invalid-feedback"> </div>
+               </div>
             </div>
             <div class="row">
-               <p class="form-register">
+               <div class="form-register">
                   <label class="col-12 sinPadding" for="pass">CONTRASEÑA</label>
-                  <input class="col-12 register" type="password" name="password" id="pass">
-               </p>
+                  <input class="col-12 register" type="password" name="password" id="pass" data-name="contraseña">
+                  <div class="invalid-feedback"> </div>
+               </div>
             </div>
             <div class="row">
-               <p class="pAdd examinar">
+               <div class="examinar">
                    <label class="col-12 examinar">SUBIR IMAGÉN</label>
-                   <input class="col-12 examinar" type="file" name="avatar">
-               </p>
+                   <input class="col-12 examinar" type="file" name="avatar" data-name="subir imagén">
+                   <div class="invalid-feedback"> </div>
+               </div>
            </div>
             <p>
                <label class="check-register" for="cond"><input type="checkbox" name="cond" id="cond"> He leido y acepto
                   los terminos y condiciones </label>
             </p>
          </div>
-         <p class=>
+         <p>
             <label class="check-register" for="news"><input type="checkbox" name="news" id="news"> Me gustaria recibir
              el newsletter con las novedades de SportwearClub </label>
          </p>
@@ -93,4 +87,5 @@
 <div class="div-register">
    <p><a href="/" class="footer-register"> SUSCRIBITE, ENTERATE DE LAS NOVEDADES Y DESCUENTOS</a></p>
 </div>
+
 <%- include('../partials/footer') %>

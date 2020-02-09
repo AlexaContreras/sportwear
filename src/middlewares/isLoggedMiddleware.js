@@ -1,6 +1,37 @@
-const fs = require('fs');
-const path = require('path');
+const db = require('../database/models');
+const sq = db.sequelize;const fs = require('fs');
 
+const isLoggedMiddleware = async (req,res,next) => {
+    // Seteamos isLogged como false
+    res.locals.isLogged = false;
+    
+    // Si req.session.userId es distinto de undefined, es porque existe
+    /* 
+        ¿Por qué existe? - Por que el userCookieMiddleware trajo de la cookie el id guardado 
+        y ese id guardado en la cookie lo pasó a session.
+        Por eso userCookieMiddleware en app.js va antes de isLoggedMiddleware
+    */ 
+    if (req.session.userId != undefined) {
+        // Al saber que tenemos el id en req.session.userId, pasamos res.locals.isLogged a true
+        res.locals.isLogged = true;
+        // Ahora en locals vamos a guardar en userLogged al usuario que corresponde con el id que tenemos en session
+        let user =  await db.Users.findByPk(req.session.userId)
+        .catch(error => console.log(error)
+        );
+        
+        
+        res.locals.userLogged = user
+    
+        
+        
+       
+    }
+    next();
+}
+
+module.exports = isLoggedMiddleware;
+
+/* const path = require('path');
 const userFilePath = path.join(__dirname, '/../data/users.json');
 
 // Funciones necesarias para traer al usuario por id
@@ -26,7 +57,7 @@ const isLoggedMiddleware = (req,res,next) => {
         y ese id guardado en la cookie lo pasó a session.
         Por eso userCookieMiddleware en app.js va antes de isLoggedMiddleware
     */ 
-    if (req.session.userId != undefined) {
+   /* if (req.session.userId != undefined) {
         // Al saber que tenemos el id en req.session.userId, pasamos res.locals.isLogged a true
         res.locals.isLogged = true;
         // Ahora en locals vamos a guardar en userLogged al usuario que corresponde con el id que tenemos en session
@@ -35,4 +66,4 @@ const isLoggedMiddleware = (req,res,next) => {
     next();
 }
 
-module.exports = isLoggedMiddleware;
+module.exports = isLoggedMiddleware; */

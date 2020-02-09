@@ -12,7 +12,7 @@
     <div class="col-6">
       <ul class="login">
  <% if (isLogged == true) { %>
-        <li><img class="perfil" src="/images/avatarsUsers/<%= userLogged.avatar%>" width="40" style="border-radius: 100%;"><a href="/users/profile" style="text-transform: uppercase;"> <%= userLogged.first_name %>
+        <li><img class="perfil" src="/images/avatarsUsers/<%=userLogged.avatar%>" width="40" style="border-radius: 100%;"><a href="/users/profile" style="text-transform: uppercase;"> <%= userLogged.first_name %>
           </a></li>
         <li><a href="/users/logout"><i class="far fa-paper-plane"></i> LOGOUT</a></li>
 
