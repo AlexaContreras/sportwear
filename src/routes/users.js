@@ -31,6 +31,8 @@ router.post('/register',uploadUser.single('avatar') , [
 
 	check('first_name').isLength({min:1}).withMessage('El primer campo debe contener tu nombre'),
 	check('last_name').isLength({min:1}).withMessage('El segundo campo debe contener tu apellido'),
+	check('date').isLength({min:1}).withMessage('El tercer campo de contener una fecha con el formato requerido'),
+	check('country_id').isLength({min:1}).withMessage('El cuarto campo debe contener el país de tu residencia'),
 	check('city').isLength({min:1}).withMessage('El quinto campo debe contener la cuidad de tu residencia'),
 	check('email').isEmail().withMessage('El email debe tener un formato valido'),
 	check('password').isLength({min:8}).withMessage('La contraseña debe tener al menos 8 carácteres')

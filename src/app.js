@@ -7,6 +7,9 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const userCookieMiddleware = require('./middlewares/userCookieMiddleware');
 const isLoggedMiddleware = require('./middlewares/isLoggedMiddleware');
+const lastProductsMiddleware = require('./middlewares/lastProductsMiddleware');
+const cartMiddleware = require('./middlewares/cartMiddleware');
+
 
 
 
@@ -30,6 +33,8 @@ app.use(session({
 app.use(userCookieMiddleware);
 // Middleware que setea res.locals va después del middleware de cookies
 app.use(isLoggedMiddleware);
+app.use(lastProductsMiddleware);
+app.use(cartMiddleware);
 
 const mainRouter = require('./routes/main')
 app.use('/', mainRouter);
@@ -39,6 +44,9 @@ app.use('/products', productRouter);
 
 const userRouter = require('./routes/users')
 app.use('/users', userRouter);
+
+const apisRouter = require('./routes/apis')
+app.use('/apis', apisRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

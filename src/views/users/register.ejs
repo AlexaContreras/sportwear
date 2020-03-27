@@ -3,13 +3,24 @@
 
 
 <div class="registerBody">
+  
 
    <h1 class="title-register">REGISTRATE</h1>
    <div class="registro">
       <form class="user" action="/users/register" method="POST" enctype="multipart/form-data">
          <div class="sub-inputs">
+ <% if (typeof errors != 'undefined' ){%> 
+
+      <%  errors.forEach(error => {%> 
+         <ul class="validator-errors">
+            <li> <%= error.msg %> </li>
+         </ul>
+
+<% })%> 
+      <%  } %> 
             <div class="row">
                <div class="form-register">
+         
                   <label class="col-12 sinPadding " for="nombre">TU NOMBRE </label>
                   <input class="col-12 register" type="text" name="first_name" id="nombre" data-name="nombre">
                   <div class="invalid-feedback"> </div>

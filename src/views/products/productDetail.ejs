@@ -43,7 +43,11 @@
             <div class="descripcion">
                 <p> <%= product.description %> </p>
             </div>
-            <button type="submit" class="btn-detail">Añadir al carrito</button>
+            <form action="/products/cart" method="post">
+                <input type="hidden" name="product" value="<%= product.id %> ">
+                <button type="submit" class="btn-detail">Añadir al carrito</button>
+            </form>
+            
 
             <form action="/products/delete/<%= product.id%>?_method=DELETE" method="POST">
                 <button type="submit" class="btn-detail">Eliminar artículo</button>

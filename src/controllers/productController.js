@@ -1,5 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const {
+    check,
+    validationResult,
+    body
+} = require('express-validator');
 const db = require('../database/models');
 const sq = db.sequelize;
 
@@ -23,11 +28,39 @@ let productController = {
     },
 
     productCart: (req, res) => {
-        res.render('products/productCart', {
-            title: 'Product cart',
-            bodyName: 'cart',
+        db.Products.
+        findAll({
+            where:{
+                id : req.session.cart
+            }
+            
         })
+        .then(products => {
+     
+           return res.render('products/productCart', {
+                title: 'Product cart',
+                bodyName: 'cart',
+                products
+            })
+        }
 
+        )
+        .catch( error => console.log(error)
+        )
+        
+
+    },
+    addProductCart: (req,res) => {
+        let cart = req.session.cart;
+        if(!cart.includes(req.body.product)){
+            req.session.cart.push(req.body.product);
+            
+        
+        }
+        
+        res.redirect('/')
+        
+        
     },
 
     productShow: (req, res) => {
@@ -52,6 +85,22 @@ let productController = {
                     bodyName: 'add'
                 })
             }).catch(error => console.log(error))
+
+    },
+    deleteProductCart : (req, res) => {
+        function erase ( arr, item ) {
+            var i = arr.indexOf( `${item} ` );
+         
+            if ( i !== -1 ) {
+                arr.splice( i, 1 );
+            }
+        }
+
+        erase(req.session.cart, req.params.id)
+        
+
+        res.redirect('/products/cart')
+        
 
     },
 

@@ -3,6 +3,15 @@
 <div class="addBody">
     <h1 class="titleAdd">CREA UN PRODUCTO</h1>
     <form action="/products/add" method="POST" enctype="multipart/form-data">
+        <% if (typeof errors != 'undefined' ){%> 
+
+            <%  errors.forEach(error => {%> 
+               <ul class="validator-errors">
+                  <li> <%= error.msg %> </li>
+               </ul>
+      
+      <% })%> 
+            <%  } %> 
         <div class="row">
             <p class="pAdd">
                 <label class="col-12">Nombre del producto:</label class"col-12">

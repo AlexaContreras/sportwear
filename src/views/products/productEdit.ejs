@@ -21,7 +21,21 @@
                 <textarea class="col-12" name="description"><%= product.description %></textarea>
             </p>
         </div>
-
+        <div class="row">
+            <p class="pAdd">
+                <label class="col-12">Marca:</label>
+                <select class="col-12" name="brand_id">
+                    <% brands.forEach(brand => { %>
+                        <%  if(brand.id == product.brand_id) { %>
+                        <option value="<%=brand.id%>" selected/><%=brand.name%> </option>
+                       <% } else {%>
+                        <option value="<%=brand.id%>" /> <%=brand.name%> </option>
+    
+                        <% } %>
+                        <% }) %>
+                </select>
+            </p>
+        </div>
 
 
         <div class="row">

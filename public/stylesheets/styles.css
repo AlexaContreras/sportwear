@@ -316,6 +316,10 @@ body.register {
   font-size: .8em;
 
 }
+ul.validator-errors {
+  color: red;
+  padding-left: 0;
+}
 ul.validator{
   padding: 0;
   background-color: rgb(245, 245, 86);;
@@ -733,8 +737,18 @@ label.examinar{
 }
 
 /*SHOPPIN CART*/
+  #erase {
+    background-color:black;
+    color: rgb(255, 255, 255);
+}
 
-  
+  #purchase {
+    color: black;
+    padding: 0;
+    background-color: rgb(245, 245, 86);;
+    text-align: center;
+    padding: 15px;
+  }
 
 .pc {
   display: flex;
@@ -818,6 +832,8 @@ label.examinar{
 }
 .pc_pay{
 align-items: center;
+background-color: black;
+color: white;
 border: black solid 1px;
 margin: 15px;
 padding: 0 15px;
@@ -825,6 +841,7 @@ display: flex;
 justify-content: space-between;
 }
 .pc_continue {
+  background-color: white;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -832,7 +849,7 @@ justify-content: space-between;
   padding: 5px;
   margin: 15px 0;
 }
-.pc_continue p {
+.pc_continue p, .pc_continue i {
   color: black;
   margin: 0 0 0 5px;
  

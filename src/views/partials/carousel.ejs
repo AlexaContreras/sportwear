@@ -1,20 +1,16 @@
 <div class="carousel-title">
     <h1>LO NUEVO</h1>
 </div>
-
 <div class="carousel-down">
-<div class="owl-carousel owl-theme">
-    <div class="item"><img src="../../images/item9.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item11.jpg" alt="Imagen de prducto"></div>
-    <div class="item"><img src="../../images/item7.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item5.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item6.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item4.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item2.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item8.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item10.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item3.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item12.jpg" alt="Imagen de producto"></div>
-    <div class="item"><img src="../../images/item13.jpg" alt="Imagen de producto"></div>
+    <div class="owl-carousel owl-theme">
+        <% for (let index = 0; index < lastProducts.length; index++) {%>
+        <div class="item">
+            <a href="/products/detail/<%= lastProducts[index].id %> ">
+                <img src="../../images/avatars/<%=lastProducts[index].avatar%>"
+                alt=<%= lastProducts[index].name %> style="width:250px; height:220px;">
+            </a>
+            </div>
+        <%}%> 
+
 </div>
 </div>
