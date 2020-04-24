@@ -13,6 +13,8 @@ module.exports = (sequelize, dataTypes) => {
         avatar: dataTypes.STRING,
         country_id: dataTypes.INTEGER,
 		password: dataTypes.STRING,
+		role: dataTypes.STRING
+		
 	});
     User.associate = (models) => {
         User.belongsTo(models.Countries, {

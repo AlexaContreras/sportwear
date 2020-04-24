@@ -36,6 +36,7 @@ app.use(isLoggedMiddleware);
 app.use(lastProductsMiddleware);
 app.use(cartMiddleware);
 
+
 const mainRouter = require('./routes/main')
 app.use('/', mainRouter);
 

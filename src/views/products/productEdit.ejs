@@ -1,5 +1,37 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
+
+
+<!-- ID Main container es el que contiene toooooodo -->
+
+<!-- Header -->
+
+
+<% if (isLogged == false) { %>
+<div class="container-grow-box-form">
+    <div class="text-center">
+        <h1 class="error">ERROR</h1>
+        <h3>OH NO! NO PODES ENTRAR!</h3>
+        <img src=""" width=" 200px" alt="">
+        <p class="text-center">NECESITAS ESTAR <b>LOGUEADO</b> Y SER <b>ADMINISTRADOR</b>
+            PARA
+            iINGRESAR A ESTA SECCIÓN</p>
+    </div>
+</div>
+<% } else if (userLogged.role == "user"){ %>
+<div class="container-grow-box-form">
+    <div class="text-center">
+        <h1 class="error">ERROR</h1>
+        <h3>OH NO! NO PODES ENTRAR!</h3>
+        <img src="/images/accesorios.jpg' width=" 200px" alt="">
+        <p class="text-center text-amarillo font-abel f-22">NECESITAS SER <b>ADMINISTRADOR</b> PARA INGRESAR A ESTA
+            SECCIÓN</p>
+        <p class="text-center">TU ROL ACTUAL ES : <%= userLogged.role %></p>
+        <p class="text-center">COMUNICATE CON EL ADMINISTRADOR PARA QUE TE DE LOS PERMISOS</p>
+    </div>
+</div>
+<% } else { %>
+<%  if(product != null ) { %>
 <div class="addBody">
     <h1 class="titleAdd">EDITAR PRODUCTO</h1>
     <form action="/products/edit/<%= product.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
@@ -26,13 +58,13 @@
                 <label class="col-12">Marca:</label>
                 <select class="col-12" name="brand_id">
                     <% brands.forEach(brand => { %>
-                        <%  if(brand.id == product.brand_id) { %>
-                        <option value="<%=brand.id%>" selected/><%=brand.name%> </option>
-                       <% } else {%>
-                        <option value="<%=brand.id%>" /> <%=brand.name%> </option>
-    
-                        <% } %>
-                        <% }) %>
+                    <%  if(brand.id == product.brand_id) { %>
+                    <option value="<%=brand.id%>" selected /><%=brand.name%> </option>
+                    <% } else {%>
+                    <option value="<%=brand.id%>" /> <%=brand.name%> </option>
+
+                    <% } %>
+                    <% }) %>
                 </select>
             </p>
         </div>
@@ -40,24 +72,21 @@
 
         <div class="row">
             <p class="pAdd">
-                
+
                 <label class="col-12">Color:</label>
-                
+
                 <select class="col-12" name="colors" multiple>
                     <option value="">Seleccione los colores</option>
-                    <% let isOk = false; %> 
-                    <% for(let i = 0; i < colors.length; i++) { %> 
-                        <% for(let j = 0; j < product.colors.length; j++ ) { %>
-                            <% if (product.colors[j].id == colors[i].id) { %>
-                                <% isOk = true; break;  %> 
-                            <% } else { %>
-                                <% isOk = false; %> 
-                            <% } %>
-                        <% } %>
-                        <option 
-                            value="<%=colors[i].id%>"
-                            <%= isOk ? 'selected' : null %>
-                        ><%=colors[i].name%> </option>
+                    <% let isOk = false; %>
+                    <% for(let i = 0; i < colors.length; i++) { %>
+                    <% for(let j = 0; j < product.colors.length; j++ ) { %>
+                    <% if (product.colors[j].id == colors[i].id) { %>
+                    <% isOk = true; break;  %>
+                    <% } else { %>
+                    <% isOk = false; %>
+                    <% } %>
+                    <% } %>
+                    <option value="<%=colors[i].id%>" <%= isOk ? 'selected' : null %>><%=colors[i].name%> </option>
                     <% } %>
                 </select>
             </p>
@@ -67,19 +96,16 @@
                 <label class="col-12">Talle:</label>
                 <select class="col-12" name="sizes" multiple>
                     <option value="">Seleccione los talles</option>
-                    <% let isOk1 = false; %> 
-                    <% for(let i = 0; i < sizes.length; i++) { %> 
-                        <% for(let j = 0; j < product.sizes.length; j++ ) { %>
-                            <% if (product.sizes[j].id == sizes[i].id) { %>
-                                <% isOk1 = true; break;  %> 
-                            <% } else { %>
-                                <% isOk1 = false; %> 
-                            <% } %>
-                        <% } %>
-                        <option 
-                            value="<%=sizes[i].id%>"
-                            <%= isOk1 ? 'selected' : null %>
-                        ><%=sizes[i].name%> </option>
+                    <% let isOk1 = false; %>
+                    <% for(let i = 0; i < sizes.length; i++) { %>
+                    <% for(let j = 0; j < product.sizes.length; j++ ) { %>
+                    <% if (product.sizes[j].id == sizes[i].id) { %>
+                    <% isOk1 = true; break;  %>
+                    <% } else { %>
+                    <% isOk1 = false; %>
+                    <% } %>
+                    <% } %>
+                    <option value="<%=sizes[i].id%>" <%= isOk1 ? 'selected' : null %>><%=sizes[i].name%> </option>
                     <% } %>
                 </select>
             </p>
@@ -91,8 +117,8 @@
                     <option value="">Seleccione Categoria</option>
                     <% categories.forEach(category => { %>
                     <%  if(category.id == product.category_id) { %>
-                    <option value="<%=category.id%>" selected/><%=category.name%> </option>
-                   <% } else {%>
+                    <option value="<%=category.id%>" selected /><%=category.name%> </option>
+                    <% } else {%>
                     <option value="<%=category.id%>" /> <%=category.name%> </option>
 
                     <% } %>
@@ -106,13 +132,13 @@
                 <label class="col-12">Tipo de producto:</label>
                 <select class="col-12 add" name="type_id">
                     <% types.forEach(type => { %>
-                        <%  if(type.id == product.type_id) { %>
-                        <option value="<%=type.id%>" selected/><%=type.name%> </option>
-                       <% } else {%>
-                        <option value="<%=type.id%>" /> <%=type.name%> </option>
-    
-                        <% } %>
-                        <% }) %>
+                    <%  if(type.id == product.type_id) { %>
+                    <option value="<%=type.id%>" selected /><%=type.name%> </option>
+                    <% } else {%>
+                    <option value="<%=type.id%>" /> <%=type.name%> </option>
+
+                    <% } %>
+                    <% }) %>
                 </select>
             </p>
         </div>
@@ -120,14 +146,13 @@
             <p class="pAdd">
                 <label class="col-12">Status:</label>
                 <select class="col-12 add" name="status">
-                    <<% status.forEach(statu => { %>
-                        <%  if(statu.id == product.status_id) { %>
-                        <option value="<%=statu.id%>" selected/><%=statu.name%> </option>
-                       <% } else {%>
-                        <option value="<%=statu.id%>" /> <%=statu.name%> </option>
-    
-                        <% } %>
-                        <% }) %>
+                    <<% status.forEach(statu => { %> <%  if(statu.id == product.status_id) { %> <option
+                        value="<%=statu.id%>" selected /><%=statu.name%> </option>
+                    <% } else {%>
+                    <option value="<%=statu.id%>" /> <%=statu.name%> </option>
+
+                    <% } %>
+                    <% }) %>
 
                 </select>
             </p>
@@ -142,5 +167,23 @@
     </form>
 </div>
 
-</body>
+<% } else {%>
+<div class="container-grow-box-form">
+    <div class="text-center">
+        <h1 class="error">ERROR</h1>
+        <h3>OH NO! NO PODES ENTRAR!</h3>
+        <img src="/images/accesorios.jpg' width=" 200px" alt="">
+        <p class="text-center text-amarillo font-abel f-22">NO EXISTE EL <b>PRODUCTO</b> QUE QUIERES EDITAR</p>
+        <p class="text-center  font-abel">INTENTA CON OTRO IDENTIFICADOR</p>
+    </div>
+</div>
+<% } %>
+<% } %>
+
+<!-- Footer -->
+
+<!-- ↓↓ aca termina el DIV main container ↓↓ -->
+</div>
+
+
 <%- include('../partials/footer') %>

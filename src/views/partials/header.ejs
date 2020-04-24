@@ -1,9 +1,10 @@
-<div class="row">
-  <div class="col-12">
-    <p class="cuotas">ENVIO SIN CARGO EN TU COMPRA SUPERIOR A $1999 + 3 CUOTAS SIN INTERES</p>
+
+<header class="container-fluid nav1 header">
+  <div class="row ofert-box-header">
+    <div class="col-12">
+      <p class="cuotas">ENVIO SIN CARGO EN TU COMPRA SUPERIOR A $1999 + 3 CUOTAS SIN INTERES</p>
+    </div>
   </div>
-</div>
-<header class="container-fluid nav1">
   <div class="row logo-over ">
     <div class="col-6 logo-img">
       <a href="/"><img src="../../images/recurso2.png" alt="logo" class="logo"></a>
@@ -48,11 +49,16 @@
       <li><a href="/products/sale">SALE</a></li>
     </ul>
     <nav class="col-9 col-sm-5 col-lg-5 search-bar">
-      <form role="search" class="search-form">
+      <!-- <form role="search" class="search-form">
         <label>
           <input type="search" class="search" />
-        </label>
-        <a class="shopping-cart" href="/products/cart"><i class="fas fa-shopping-cart"></i></a>
+        </label> -->
+        <% if (isLogged == true) { %>
+         
+          <a class="shopping-cart" href="/products/cart"><i class="fas fa-shopping-cart"></i></a>
+  
+          <% }  %>
+        
       </form>
     </nav>
 

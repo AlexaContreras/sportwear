@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const auntenticarCartMiddleware = require('../middlewares/autenticarCartMiddleware')
 
 
 /* Usando multer para almacenar imagenes */
@@ -26,7 +27,7 @@ const productController = require('../controllers/productController');
 
 /* Rutas a los archivos */
 router.get('/detail/:id', productController.productDetail);
-router.get('/cart', productController.productCart);
+router.get('/cart', auntenticarCartMiddleware, productController.productCart);
 router.post('/cart', productController.addProductCart);
 router.delete('/cart/delete/:id', productController.deleteProductCart);
 router.get('/add', productController.productShow);
@@ -42,6 +43,7 @@ router.get('/sale', productController.sale);
 router.get('/clothes', productController.clothes);
 router.get('/accesories', productController.accesories);
 router.get('/shoes', productController.shoes);
+router.post('/:name', productController.filter);
 
 
 

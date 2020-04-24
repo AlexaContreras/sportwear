@@ -1,4 +1,24 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
-<h1>Nosotros</h1>
+<div id="contenedor">
+<video id="video" muted autoplay loop>
+    <source src="../videos/herobrapro.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+</video>
+
+<div id="up-video">
+    <p id="mission"> NUESTRA MISIÓN:</p>
+    <p>BRINDAR INSPIRACIÓN<br>
+       E INNOVACIÓN <br>
+        A TODOS LOS ATLETAS <br>
+        ALREDEDOR DEL MUNDO</p>
+</div>
+</div>
+<div id="about-us">
+<h2>ACERCA DE SPORTWEAR</h2>
+    <p>Nuestra misión es lo que nos impulsa a hacer todo lo posible para expandir el potencial humano. Lo hacemos al crear innovaciones deportivas modernas, al hacer que nuestros productos sean más sostenibles, al construir un equipo global creativo y diverso y al tener un impacto positivo en las comunidades donde vivimos y trabajamos. </p>
+
+</div>
+<%-include('partials/carousel') %>
+
 <%- include('partials/footer') %>

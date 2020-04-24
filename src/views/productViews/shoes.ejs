@@ -1,19 +1,24 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
+
 <div>
     <h4 class="titleCategory">Disfrutá de nuestros productos</h4>
 </div>
-<div class="row">
-<% products.forEach(product => { if(product.type_id == "2") {%>
-<div class="col-sm-6 col-lg-4 fluid-category">
-        <a class="a-category" href="/products/detail/<%=product.id%>">
-        <img class="img-category" src="../../images/avatars/<%=product.avatar%>" alt="">
-        <h2> <%= product.name %> </h2>
-        </a>
-        <p class="p-category">$ <%= product.price %> </p>
-    </div>  
-<% }}) %>
-</div>
+<%- include('../partials/filter.ejs') %> 
+<div class="container-fluid">
+    <div class="row">
 
-</body>
+        <div class="col-lg-10 box-cat">
+            <% products.forEach(product => { if(product.type_id == "2") {%>
+                <div class="cat-box">
+            <a class="a-cat" href="/products/detail/<%=product.id%>">
+                <img class="img-cat" src="../../images/avatars/<%=product.avatar%>" alt="">
+                <h2> <%= product.name %> </h2>
+            </a>
+            <p class="p-cat">$ <%= product.price %> </p>
+        </div>
+            <% }}) %>
+        </div>
+    </div>
+</div>
 <%- include('../partials/footer') %>

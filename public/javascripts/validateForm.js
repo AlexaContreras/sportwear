@@ -144,6 +144,7 @@ form.addEventListener('submit', function (event) {
 		
 		event.preventDefault();
 		errorMsg.innerHTML = 'Debes completar correctamente el formulario'
+		 errorMsg.innerHTML += ' <br>Verifica que hayas cargado una imagen'
 	
 	}
 })

@@ -5,6 +5,7 @@ const isLoggedMiddleware = async (req,res,next) => {
     // Seteamos isLogged como false
     res.locals.isLogged = false;
     
+    
     // Si req.session.userId es distinto de undefined, es porque existe
     /* 
         ¿Por qué existe? - Por que el userCookieMiddleware trajo de la cookie el id guardado 
@@ -14,6 +15,7 @@ const isLoggedMiddleware = async (req,res,next) => {
     if (req.session.userId != undefined) {
         // Al saber que tenemos el id en req.session.userId, pasamos res.locals.isLogged a true
         res.locals.isLogged = true;
+        
         // Ahora en locals vamos a guardar en userLogged al usuario que corresponde con el id que tenemos en session
         let user =  await db.Users.findByPk(req.session.userId)
         .catch(error => console.log(error)
@@ -21,6 +23,8 @@ const isLoggedMiddleware = async (req,res,next) => {
         
         
         res.locals.userLogged = user
+
+      
     
         
         

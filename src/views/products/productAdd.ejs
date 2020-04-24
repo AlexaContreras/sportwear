@@ -1,17 +1,47 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
+
+
+<!-- ID Main container es el que contiene toooooodo -->
+<!-- Header -->
+
+
+<% if (isLogged == false) { %>
+<div class="container-grow-box-form">
+    <div class="text-center">
+        <h1 class="error">ERROR</h1>
+        <h3>Oh No! No podes entrar!</h3>
+        <img src=""" width=" 200px" alt="">
+        <p class="text-center text-amarillo font-abel">Necesitas estar <b>logueado</b> y ser <b>Administrador</b> para
+            ingresar a esta sección</p>
+    </div>
+</div>
+<% } else if (userLogged.role == "user"){ %>
+<div class="container-grow-box-form">
+    <div class="text-center">
+        <h1 class="error">ERROR</h1>
+        <h3>Oh No! No podes entrar!</h3>
+        <img src="/images/accesorios.jpg' width=" 200px" alt="">
+        <p class="text-center text-amarillo font-abel f-22">Necesitas Ser <b>Administrador</b> para ingresar a esta
+            sección</p>
+        <p class="text-center  font-abel">Tu rol actual es: <%= userLogged.role %></p>
+        <p class="text-center  font-abel">Comunicate con el Administrador para que te de los permisos</p>
+    </div>
+</div>
+<% } else { %>
+
 <div class="addBody">
     <h1 class="titleAdd">CREA UN PRODUCTO</h1>
     <form action="/products/add" method="POST" enctype="multipart/form-data">
-        <% if (typeof errors != 'undefined' ){%> 
+        <% if (typeof errors != 'undefined' ){%>
 
-            <%  errors.forEach(error => {%> 
-               <ul class="validator-errors">
-                  <li> <%= error.msg %> </li>
-               </ul>
-      
-      <% })%> 
-            <%  } %> 
+        <%  errors.forEach(error => {%>
+        <ul class="validator-errors">
+            <li> <%= error.msg %> </li>
+        </ul>
+
+        <% })%>
+        <%  } %>
         <div class="row">
             <p class="pAdd">
                 <label class="col-12">Nombre del producto:</label class"col-12">
@@ -106,5 +136,10 @@
     </form>
 </div>
 
-</body>
+<% } %>
+
+<!-- Footer -->
+
+<!-- ↓↓ aca termina el DIV main container ↓↓ -->
+
 <%- include('../partials/footer') %>

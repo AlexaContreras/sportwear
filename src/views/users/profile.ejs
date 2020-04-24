@@ -1,20 +1,22 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
-<div class="container-profile">
-    <div class="profile">
-        <div class="row div-profile-name">
-            <div class="col-12 col-sm-6">
-                <h2 class="profile-name"> Hola <%= userLogged.first_name%> </h2>
+<div class="container-grow-box-login">
+    <div class="container-profile">
+
+        <div class="profile">
+            <div class="row div-profile-name">
+                <div class="col-12 col-sm-6">
+                    <h2 class="profile-name"> Hola <%= userLogged.first_name%> </h2>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-12">
-                <img class="profile-img" src="/images/avatarsUsers/<%= userLogged.avatar %>" width="100%">
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <img class="profile-img" src="/images/avatarsUsers/<%= userLogged.avatar %>" width="100%">
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-12">
-                
+            <div class="row">
+                <div class="col-12 col-sm-12">
+
                     <h2 class="profile-name-2"> Hola <%= userLogged.first_name %> </h2>
                     <input class="profile-input" type="text" value="<%= userLogged.email %>">
 
@@ -23,12 +25,22 @@
                         <button type="submit" class="btn-detail">ACTUALIZAR DATOS</button>
                     </form>
                     <form action="/users/delete/<%= userLogged.id%>?_method=DELETE" method="POST">
+                        <input type="hidden" name="id" value="<%= userLogged.id%>">
                         <button type="submit" class="btn-detail">BORRAR USUARIO</button>
-                     </form>
+                    </form>
+                    <% if (userLogged.role == "admin"){ %>
+                    <form action="/users/list" method="GET">
+                        <button type="submit" class="btn-detail">LISTA DE USUARIOS</button>
+                    </form>
+                    <form action="/products/add" method="GET">
+                        <button type="submit" class="btn-detail">CREA UN PRODUCTO</button>
+                    </form>
 
+                    <% } %>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>
 <%- include('../partials/footer') %>

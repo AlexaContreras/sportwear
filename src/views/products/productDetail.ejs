@@ -1,101 +1,212 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
-
-<div class="contenedor">
-    <div class="row">
-        <div class="div-detail col-12 col-lg-6">
-            <img class="detail" src="../../images/avatars/<%=product.avatar%>" alt="">
-            <h2 class="display-sm"> <%= product.name %> </h2>
-            <p class="display-sm"> <b>Precio: </b>$ <%= product.price %> </p>
-            <p class="display-sm"> <b>Marca: </b>  <%= product.brand.name %> </p>
-        </div>
-        <div class="div-detail-content col-12 col-lg-6">
-            <h2 class="display-sm"> <%= product.name %> </h2>
-            <p class="display-sm"> <b>Precio: </b>$ <%= product.price %> </p>
-            <p class="display-sm"> <b>Marca :</b>  <%= product.brand.name %> </p>
-
-            
-            <p class="center"> Colores</p>
-           
-            <div class="color">
-                <p class="center">
-            
-                    <% product.colors.forEach(oneColor => { %>
-                        <%  if(oneColor.name != 'Blanco'){ %>
-                    <i class="fas fa-circle fa-3x fa-lg <%=oneColor.name%>"></i>
-                    <% } else { %>
-                        <i class="far fa-circle fa-3x fa-lg <%=oneColor.name%>"></i>
-                    <% } %>
-                    <% }) %>
-                </p>
-            </div>
-
-
-            <p class="center">Talles</p>
-            <div class="size">
-            <% product.sizes.forEach(oneSize => { %>
-                <label>
-                    <div class="talle"><%=oneSize.name%></div>
-                </label>
-                <input type="radio" name="talle" value="<%=oneSize.id%>"">
-                <% }) %>
-            </div>
-            <div class="descripcion">
-                <p> <%= product.description %> </p>
-            </div>
-            <form action="/products/cart" method="post">
-                <input type="hidden" name="product" value="<%= product.id %> ">
-                <button type="submit" class="btn-detail">Añadir al carrito</button>
-            </form>
-            
-
-            <form action="/products/delete/<%= product.id%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn-detail">Eliminar artículo</button>
-            </form>
-        </div>
-    </div>
-    <div class="row progress-bars">
-        <div class="col-3 progress-bars-div">
-            <section class="star-progress">
-                <i class="fas fa-star fa-3x fa-lg"></i>
-                <h4>4.3</h4>
-            </section>
-            <p>Puntuaciones</p>
-        </div>
-        <div class=" col-3 rating-stars">
-            <i class="fas fa-star">5</i>
-            <i class="fas fa-star">4</i>
-            <i class="fas fa-star">3</i>
-            <i class="fas fa-star">2</i>
-            <i class="fas fa-star">1</i>
-        </div>
-
-        <div class="col-6 progress-bar-bars">
-            <div class=" progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+<%if (product != null) {%>
+    <% if (isLogged == true && userLogged.role == "admin"){ %>
+        <div class="contenedor">
+            <div class="row">
+                <div class="div-detail col-12 col-lg-6">
+                    <img class="detail" src="../../images/avatars/<%=product.avatar%>" alt="">
+                    <h2 class="display-sm"> <%= product.name %> </h2>
+                    <p class="display-sm"> <b>Precio: </b>$ <%= product.price %> </p>
+                    <p class="display-sm"> <b>Marca: </b>  <%= product.brand.name %> </p>
+                </div>
+                <div class="div-detail-content col-12 col-lg-6">
+                    <h2 class="display-sm"> <%= product.name %> </h2>
+                    <p class="display-sm"> <b>Precio: </b>$ <%= product.price %> </p>
+                    <p class="display-sm"> <b>Marca :</b>  <%= product.brand.name %> </p>
+                    <p class="display-sm"> <b>Categoria :</b>  <%= product.category.name %> </p>
+                    
+        
+                    
+                    <p class="center"> Colores</p>
+                   
+                    <div class="color">
+                        <p class="center">
+                    
+                            <% product.colors.forEach(oneColor => { %>
+                                <%  if(oneColor.name != 'Blanco'){ %>
+                            <i class="fas fa-circle fa-3x fa-lg <%=oneColor.name%>"></i>
+                            <% } else { %>
+                                <i class="far fa-circle fa-3x fa-lg <%=oneColor.name%>"></i>
+                            <% } %>
+                            <% }) %>
+                        </p>
+                    </div>
+        
+        
+                    <p class="center">Talles</p>
+                    <div class="size">
+                    <% product.sizes.forEach(oneSize => { %>
+                        <label>
+                            <div class="talle"><%=oneSize.name%></div>
+                        </label>
+                        <input type="radio" name="talle" value="<%=oneSize.id%>"">
+                        <% }) %>
+                    </div>
+                    <div class="descripcion">
+                        <p> <%= product.description %> </p>
+                    </div>
+    
+                        <form action="/products/edit/<%= product.id%>" method="get">
+                            <button type="submit" class="btn-detail">Editar artículo</button>
+                        </form>
+                    <form action="/products/delete/<%= product.id%>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn-detail">Eliminar artículo</button>
+                    </form>
                 </div>
             </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                    aria-valuemax="100"></div>
+            <div class="row progress-bars">
+                <div class="col-3 progress-bars-div">
+                    <section class="star-progress">
+                        <i class="fas fa-star fa-3x fa-lg"></i>
+                        <h4>4.3</h4>
+                    </section>
+                    <p>Puntuaciones</p>
+                </div>
+                <div class=" col-3 rating-stars">
+                    <i class="fas fa-star">5</i>
+                    <i class="fas fa-star">4</i>
+                    <i class="fas fa-star">3</i>
+                    <i class="fas fa-star">2</i>
+                    <i class="fas fa-star">1</i>
+                </div>
+        
+                <div class="col-6 progress-bar-bars">
+                    <div class=" progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                </div>
             </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                    aria-valuemax="100"></div>
+        </div>
+        <%-include('../partials/carousel') %>
+        <% } else { %>
+    <div class="contenedor">
+        <div class="row">
+            <div class="div-detail col-12 col-lg-6">
+                <img class="detail" src="../../images/avatars/<%=product.avatar%>" alt="">
+                <h2 class="display-sm"> <%= product.name %> </h2>
+                <p class="display-sm"> <b>Precio: </b>$ <%= product.price %> </p>
+                <p class="display-sm"> <b>Marca: </b>  <%= product.brand.name %> </p>
             </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                    aria-valuemax="100"></div>
+            <div class="div-detail-content col-12 col-lg-6">
+                <h2 class="display-sm"> <%= product.name %> </h2>
+                <p class="display-sm"> <b>Precio: </b>$ <%= product.price %> </p>
+                <p class="display-sm"> <b>Marca :</b>  <%= product.brand.name %> </p>
+                <p class="display-sm"> <b>Categoria :</b>  <%= product.category.name %> </p>
+                
+    
+                
+                <p class="center"> Colores</p>
+               
+                <div class="color">
+                    <p class="center">
+                
+                        <% product.colors.forEach(oneColor => { %>
+                            <%  if(oneColor.name != 'Blanco'){ %>
+                        <i class="fas fa-circle fa-3x fa-lg <%=oneColor.name%>"></i>
+                        <% } else { %>
+                            <i class="far fa-circle fa-3x fa-lg <%=oneColor.name%>"></i>
+                        <% } %>
+                        <% }) %>
+                    </p>
+                </div>
+    
+    
+                <p class="center">Talles</p>
+                <div class="size">
+                <% product.sizes.forEach(oneSize => { %>
+                    <label>
+                        <div class="talle"><%=oneSize.name%></div>
+                    </label>
+                    <input type="radio" name="talle" value="<%=oneSize.id%>"">
+                    <% }) %>
+                </div>
+                <div class="descripcion">
+                    <p> <%= product.description %> </p>
+                </div><% if (isLogged == true) { %>
+             
+                    <form action="/products/cart" method="post">
+                        <input type="hidden" name="product" value="<%= product.id %> ">
+                        <button type="submit" class="btn-detail">Añadir al carrito</button>
+                    </form>
+                    
+            
+                    <% } else {  %>
+                        <br> <br><br>
+                        <% }  %>
             </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
-                    aria-valuemax="100"></div>
+        </div>
+        <div class="row progress-bars">
+            <div class="col-3 progress-bars-div">
+                <section class="star-progress">
+                    <i class="fas fa-star fa-3x fa-lg"></i>
+                    <h4>4.3</h4>
+                </section>
+                <p>Puntuaciones</p>
+            </div>
+            <div class=" col-3 rating-stars">
+                <i class="fas fa-star">5</i>
+                <i class="fas fa-star">4</i>
+                <i class="fas fa-star">3</i>
+                <i class="fas fa-star">2</i>
+                <i class="fas fa-star">1</i>
+            </div>
+    
+            <div class="col-6 progress-bar-bars">
+                <div class=" progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
             </div>
         </div>
     </div>
+    <%-include('../partials/carousel') %>
+    <% }%>
+    <%} else {%>
+        <div class="container-grow-box">
+        <div class="text-center">
+            <h1 class="error">ERROR</h1>
+            <h3>Oh No! No podes entrar!</h3>
+            <img src="/images/accesorios.jpg' width=" 200px" alt="">
+            <p class="text-center text-amarillo font-abel f-22">No existe el detalle del <b>producto</b> que estas buscando </p>
+            <p class="text-center  font-abel">Intenta con otro identificador</p>
+        </div>
+    </div>
+<%}%>
 
 
-</div>
 
-<%-include('../partials/carousel') %>
 <%- include('../partials/footer') %>

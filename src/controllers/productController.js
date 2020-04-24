@@ -70,6 +70,7 @@ let productController = {
         let productBrand = db.Brands.findAll();
         let productSize = db.Sizes.findAll();
         let productStatus = db.Status.findAll();
+        
 
         Promise.all([productColors, productTypes, productCategoties, productBrand, productSize, productStatus])
             .then(([colors, types, categories, brands, sizes, status]) => {
@@ -249,126 +250,298 @@ let productController = {
 
         
     },
+ 
+    
+    men:(req, res) => {
+        let pedidoProduct = db.Products.findAll(
 
-    men: (req, res) => {
-        db.Products
-            .findAll({
-                include: ['brand', 'category', 'status', 'type']
-            })
-            .then(products => {
-                return res.render('productViews/men', {
+			{
+				order: [
+				 ['id', 'DESC']
+				]
+			}
+		);
+		
+		let pedidoBrand = db.Brands.findAll();
+		
+		   Promise.all([pedidoProduct, pedidoBrand])
+		   	 .then(function([products, brands, brands_selected]){
+				
+				return res.render('productViews/men', {
                     products,
+                    brands,
+                    brands_selected: [],
                     title: 'Hombres',
                     bodyName: 'hombre'
-                });
+                })
             })
-            .catch(error => console.log(error));
-    },
+		
+		
+			.catch(error => console.log(error)); 
 
+    },
+    
     women: (req, res) => {
-        db.Products
-            .findAll({
-                include: ['brand', 'category', 'status', 'type']
-            })
-            .then(products => {
-                return res.render('productViews/women', {
+        let pedidoProduct = db.Products.findAll(
+
+			{
+				order: [
+				 ['id', 'DESC']
+				]
+			}
+		);
+		
+		let pedidoBrand = db.Brands.findAll();
+		
+		   Promise.all([pedidoProduct, pedidoBrand])
+		   	 .then(function([products, brands, brands_selected]){
+				
+				res.render('productViews/women', {
                     products,
+                    brands,
+                    brands_selected: [],
                     title: 'Mujeres',
                     bodyName: 'mujer'
-                });
+                })
             })
-            .catch(error => console.log(error));
+		
+		
+			.catch(error => console.log(error)); 
+
     },
+   
 
     kids: (req, res) => {
-        db.Products
-            .findAll({
-                include: ['brand', 'category', 'status', 'type']
-            })
-            .then(products => {
-                return res.render('productViews/kids', {
+        let pedidoProduct = db.Products.findAll(
+
+			{
+				order: [
+				 ['id', 'DESC']
+				]
+			}
+		);
+		
+		let pedidoBrand = db.Brands.findAll();
+		
+		   Promise.all([pedidoProduct, pedidoBrand])
+		   	 .then(function([products, brands, brands_selected]){
+				
+				res.render('productViews/kids', {
                     products,
+                    brands,
+                    brands_selected: [],
                     title: 'Nenes',
                     bodyName: 'nenes'
-                });
+                })
             })
-            .catch(error => console.log(error));
-    },
+		
+		
+			.catch(error => console.log(error)); 
 
+    },
+    
     new: (req, res) => {
-        db.Products
-            .findAll({
-                include: ['brand', 'category', 'status', 'type']
-            })
-            .then(products => {
-                return res.render('productViews/new', {
+        let pedidoProduct = db.Products.findAll(
+
+			{
+				order: [
+				 ['id', 'DESC']
+				]
+			}
+		);
+		
+        let pedidoBrand = db.Brands.findAll();
+    
+		
+		   Promise.all([pedidoProduct, pedidoBrand])
+		   	 .then(function([products, brands, brands_selected]){
+				
+				res.render('productViews/new', {
                     products,
+                    brands,
+                    brands_selected: [],
                     title: 'New',
                     bodyName: 'new'
-                });
+                })
             })
-            .catch(error => console.log(error));
-    },
+		
+		
+			.catch(error => console.log(error)); 
 
+    },
+    
     sale: (req, res) => {
-        db.Products
-            .findAll({
-                include: ['brand', 'category', 'status', 'type']
-            })
-            .then(products => {
-                return res.render('productViews/sale', {
+        let pedidoProduct = db.Products.findAll(
+
+			{
+				order: [
+				 ['id', 'DESC']
+				]
+			}
+		);
+		
+        let pedidoBrand = db.Brands.findAll();
+    
+		
+		   Promise.all([pedidoProduct, pedidoBrand])
+		   	 .then(function([products, brands, brands_selected]){
+				
+				res.render('productViews/sale', {
                     products,
+                    brands,
+                    brands_selected: [],
                     title: 'Sale',
                     bodyName: 'sale'
-                });
+                })
             })
-            .catch(error => console.log(error));
+		
+		
+			.catch(error => console.log(error)); 
+
     },
 
+    shoes:(req, res) => {
+        let pedidoProduct = db.Products.findAll(
 
-    shoes: (req, res) => {
-        db.Products
-            .findAll({
-                include: ['brand', 'category', 'status', 'type']
-            })
-            .then(products => {
-                return res.render('productViews/shoes', {
+			{
+                include: ['brand', 'category', 'status', 'type'],
+				order: [
+				 ['id', 'DESC']
+				]
+			}
+		);
+		
+		let pedidoBrand = db.Brands.findAll();
+		
+		   Promise.all([pedidoProduct, pedidoBrand])
+		   	 .then(function([products, brands, brands_selected]){
+				
+				return res.render('productViews/shoes', {
                     products,
+                    brands,
+                    brands_selected: [],
                     title: 'Calzados',
                     bodyName: 'bodyCalzado'
-                });
+                })
             })
-            .catch(error => console.log(error));
+		
+		
+            .catch(error => console.log(error)); 
+            
     },
 
     clothes: (req, res) => {
-        db.Products
-            .findAll({
-                include: ['brand', 'category', 'status', 'type']
-            })
-            .then(products => {
-                return res.render('productViews/clothes', {
+        let pedidoProduct = db.Products.findAll(
+
+			{
+                include: ['brand', 'category', 'status', 'type'],
+				order: [
+				 ['id', 'DESC']
+				]
+			}
+		);
+		
+		let pedidoBrand = db.Brands.findAll();
+		
+		   Promise.all([pedidoProduct, pedidoBrand])
+		   	 .then(function([products, brands, brands_selected]){
+				
+				return res.render('productViews/clothes', {
                     products,
+                    brands,
+                    brands_selected: [],
                     title: 'Indumentaria',
                     bodyName: 'bodyIndumentaria'
-                });
+                })
             })
+		
+		
+            .catch(error => console.log(error)); 
+            
     },
 
-    accesories: (req, res) => {
-        db.Products
-            .findAll({
-                include: ['brand', 'category', 'status', 'type']
-            })
-            .then(products => {
-                return res.render('productViews/accesories', {
+    accesories:  (req, res) => {
+        let pedidoProduct = db.Products.findAll(
+
+			{
+                include: ['brand', 'category', 'status', 'type'],
+				order: [
+				 ['id', 'DESC']
+				]
+			}
+		);
+		
+		let pedidoBrand = db.Brands.findAll();
+		
+		   Promise.all([pedidoProduct, pedidoBrand])
+		   	 .then(function([products, brands, brands_selected]){
+				
+				return res.render('productViews/accesories', {
                     products,
+                    brands,
+                    brands_selected: [],
                     title: 'Accesorios',
                     bodyName: 'bodyAccesorios'
-                });
+                })
             })
-            .catch(error => console.log(error));
+		
+		
+            .catch(error => console.log(error)); 
+            
     },
+    
+    filter:(req, res) => {
+		 
+		console.log(`${req.params.name} estoyaca`);
+        
+		/* defino pedido product afuera para usarla 2 veces en el if */
+		let pedidoProduct
+
+			/* si el req.body.marca me manda algun ID hago un find all con where */
+			if(req.body.marca != undefined){
+				pedidoProduct = db.Products.findAll({
+					where: {
+		
+						brand_id: req.body.marca
+					}
+				});
+			/* si el req.body.marca me vuelve undefined, lo convierto en objeto y hago findAll() */
+			/* para q me traiga TODOS los productos. */
+			/* Hay que convertilo en objeto para que cuando pase por el .then */
+			/* se mantenga el array q le pido que cree */
+			}else{
+				req.body.marca = []
+				pedidoProduct = db.Products.findAll(
+					{
+						order: [
+						['id', 'DESC']
+						]
+					}
+				);
+			}
+		
+		/* Ahora busco todas las marcas para traer los nombres */
+		let pedidoBrand = db.Brands.findAll();
+		
+		/* promise.all para que espere hasta q todas las promesas se cumplan */
+		Promise.all([pedidoProduct, pedidoBrand])
+
+				/* defino un 3er parametro para saber q IDs estan seleccionados */
+				.then(function([products, brands, brands_selected]){
+                    res.render(`productViews/${req.params.name}`, {
+                        products,
+                        brands,
+                        brands_selected: Array.from(req.body.marca),
+                        title: `${req.params.name}`,
+                        bodyName: `${req.params.name}`
+                    })
+                })
+            
+            
+                .catch(error => console.log(error)); 
+    
+
+	},
 
 
 };

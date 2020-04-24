@@ -3,6 +3,43 @@
 <div>
     <h4 class="titleCategory">Disfrutá de nuestros productos</h4>
 </div>
+    <div class="box-checkbox">
+            <h3 class="row">BÚSQUEDA</h3>
+                <div class="col-12 font-abel">
+                    <h4>Filtrar por Marca</h4>
+                </div>
+                <div class="col-12 font-abel">
+                    <form action="/products/women" method="POST">
+                        <!-- para que las marcas las cree solas -->
+                        <% brands.forEach(oneBrand => { %>
+                                <!-- el IF a continuacion es para saber que checkboxes estan checked -->
+                                <!-- ponemos select en false -->
+                                <% let select = false  %>
+                                <!-- recorremos el array de brands_selected  -->
+                                <% brands_selected.forEach(selectedBrand => { %>
+                                    <!-- si las brands de brads_selected coinciden con el brand.id cambiamos la variable "select" a true  -->
+                                    <% if(selectedBrand == oneBrand.id) {select = true} %>
+                                <% }) %>
+                                    <!-- si select esta en true le ponemos 'checked' a ese checkbox y si no, se lo sacamos  -->
+                                <% if(select == true) {%>
+                                    <input type="checkbox" name="marca" checked value="<%= oneBrand.id %>">
+                                <%} else {%>
+                                    <input  type="checkbox" name="marca" value="<%= oneBrand.id %>">
+                                <% } %>
+                            <label id="checkbox" for="marca"><%= oneBrand.name %></label>
+                          
+                                <br id="checkbox-br">
+                           
+                        <% }) %>
+                        <br>
+                        
+                        <input id="button-filter" type="submit" value="Filtrar">
+                        
+                        
+                    </form>
+                </div>
+    
+</div>
 <div class="row">
 <% products.forEach(product => { if(product.category_id == "1") {%>
   <div class="col-sm-6 col-lg-4 fluid-category">

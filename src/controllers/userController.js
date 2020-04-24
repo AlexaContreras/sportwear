@@ -10,6 +10,7 @@ const sq = db.sequelize;
 
 const userController = {
 
+
     register: async (req, res) => {
 
         let countries = await db.Countries.findAll().catch(error => console.log(error));
@@ -23,6 +24,74 @@ const userController = {
 
 
     },
+    registerStore: async (req, res) => {
+
+        let user = await db.Users.findOne({
+            where: {
+                email: req.body.email
+            }
+        }).then(userFound => {
+            let errors = validationResult(req);
+
+            if (errors.isEmpty()) {
+                req.body.avatar = req.file.filename;
+                req.body.password = bcrypt.hashSync(req.body.password, 10);
+                db.Users
+                    .create(req.body)
+                    .then(productSaved => {
+                        res.redirect('/users/login');
+                    }).catch(error => console.log(error))
+            } else {
+                res.render('users/register', {
+                    errors: errors.errors,
+                    title: 'Register',
+                    bodyName: 'register'
+                })
+            }
+
+            if(userFound.email == req.body.email){
+                res.render('users/registerError', {
+                    title: 'Register Error',
+                    bodyName: 'registerError'
+                })
+            } 
+                            
+        }).catch(error => console.log(error)
+        )
+            
+        
+
+        
+    },
+    showUsers: (req, res) => {
+        db.Users
+            .findAll({
+                order: [
+                    ['id', 'DESC']
+                ]
+            })
+            .then(users => {
+                return res.render('users/userList', {
+                    users,
+                    title: 'Users List',
+                    bodyName: 'bodyUsersList',
+                });
+            })
+            .catch(error => console.log(error));
+    },
+    changeRole: function (req, res) {
+        db.Users.update({
+            role: req.body.role
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(user => {
+
+            res.redirect('/users/list')
+        })
+
+    },
 
     login: (req, res) => {
         res.render('users/login', {
@@ -30,26 +99,6 @@ const userController = {
             bodyName: 'bodyLogin',
         })
 
-    },
-
-    registerStore: (req, res) => {
-        let errors = validationResult(req);
-
-        if (errors.isEmpty()) {
-            req.body.avatar = req.file.filename;
-            req.body.password = bcrypt.hashSync(req.body.password, 10);
-            db.Users
-                .create(req.body)
-                .then(productSaved => {
-                    res.redirect('/users/login');
-                }).catch(error => console.log(error))
-        } else {
-            res.render('users/register', {
-                errors: errors.errors,
-                title: 'Register',
-                bodyName: 'register'
-            })
-        }
     },
 
     procesarLogin: (req, res) => {
@@ -79,17 +128,23 @@ const userController = {
                     res.redirect('/users/profile');
                 } else {
                     //En caso contrario le envìo la vista de credenciales invalidas
-                    res.send('Credenciales invalidas')
+                    res.render('users/wrongPassword', {
+                        title: 'Password Login',
+                        bodyName: 'passwordLogin',
+                    })
 
                 }
 
             } else {
                 //en caso de que el mail no coincida no realiza el compare y salta a la vista de no existe un usuario registrado con ese mail
+                res.render('users/wrongEmail', {
+                    title: 'Email Login',
+                    bodyName: 'emailLogin',
+                })
 
-                res.send('No hay usuarios registrados con ese email');
             }
         }).catch(error => console.log(error));
-    
+
 
     },
 
@@ -100,12 +155,17 @@ const userController = {
 
         Promise.all([userFind, userCountries])
             .then(([user, countries]) => {
+
+
                 res.render('users/userEdit', {
                     user,
                     countries,
                     title: 'Edit User',
                     bodyName: 'editUser'
                 })
+
+
+
             }).catch(error => console.log(error))
     },
 
@@ -131,8 +191,13 @@ const userController = {
                 id: req.params.id
             }
         }).catch(error => console.log(error))
+        
+        if (req.body.id == req.session.userId) {
+            res.redirect('/users/logout')
+        } else {
+            res.redirect('/users/list')
+        }
 
-        res.redirect('/users/logout')
 
     },
     profile: (req, res) => {

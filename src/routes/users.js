@@ -41,6 +41,8 @@ router.post('/register',uploadUser.single('avatar') , [
 
 router.get('/login', guestMiddleware, userController.login);
 router.post('/login', userController.procesarLogin);
+router.get('/list', userController.showUsers);
+router.post('/changeRole/:id', userController.changeRole);
 router.get('/profile',autenticarMiddleware ,userController.profile);
 router.get('/logout', userController.logout);
 router.get('/edit/:id', userController.editShow);

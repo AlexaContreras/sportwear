@@ -1,103 +1,117 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
 
+<div>
 
-<div class="registerBody">
-  
 
-   <h1 class="title-register">REGISTRATE</h1>
-   <div class="registro">
-      <form class="user" action="/users/register" method="POST" enctype="multipart/form-data">
-         <div class="sub-inputs">
- <% if (typeof errors != 'undefined' ){%> 
+   <div class="registerBody">
 
-      <%  errors.forEach(error => {%> 
-         <ul class="validator-errors">
-            <li> <%= error.msg %> </li>
-         </ul>
 
-<% })%> 
-      <%  } %> 
-            <div class="row">
-               <div class="form-register">
-         
-                  <label class="col-12 sinPadding " for="nombre">TU NOMBRE </label>
-                  <input class="col-12 register" type="text" name="first_name" id="nombre" data-name="nombre">
-                  <div class="invalid-feedback"> </div>
+      <h1 class="title-register">REGISTRATE </h1>
+      <div class="registro">
+         <form class="user" action="/users/register" method="POST" enctype="multipart/form-data">
+            <div class="sub-inputs">
+               <% if (typeof errors != 'undefined' ){%>
+
+               <%  errors.forEach(error => {%>
+               <ul class="validator-errors">
+                  <li> <%= error.msg %> </li>
+               </ul>
+
+               <% })%>
+               <%  } %>
+               <div class="row">
+                  <div class="form-register">
+
+                     <label class="col-12 sinPadding " for="nombre">TU NOMBRE <span class="asterisco">*</span></label>
+                     <input class="col-12 register" type="text" name="first_name" id="nombre" data-name="nombre">
+                     <div class="invalid-feedback"> </div>
+                  </div>
+
                </div>
-                  
-            </div>
-            <div class="row">
-               <div class="form-register">
-                  <label class="col-12 sinPadding " for="apellido">TU APELLIDO </label>
-                  <input class="col-12 register" type="text" name="last_name" id="apellido" data-name="apellido">
-                  <div class="invalid-feedback"> </div>
+               <div class="row">
+                  <div class="form-register">
+                     <label class="col-12 sinPadding " for="apellido">TU APELLIDO <span class="asterisco">*</span>
+                     </label>
+                     <input class="col-12 register" type="text" name="last_name" id="apellido" data-name="apellido">
+                     <div class="invalid-feedback"> </div>
+                  </div>
                </div>
-            </div>
-            <div class="row">
-               <div class="form-register">
-                  <label class="col-12 sinPadding " for="nacimiento">FECHA DE NACIMIENTO </label>
-                  <input class="col-12 date register" type="date" id="start" name="date" data-name="fecha de nacimiento">
-                  <div class="invalid-feedback"></div>
+               <div class="row">
+                  <div class="form-register">
+                     <label class="col-12 sinPadding " for="nacimiento">FECHA DE NACIMIENTO <span
+                           class="asterisco">*</span> </label>
+                     <input class="col-12 date register" type="date" id="start" name="date"
+                        data-name="fecha de nacimiento">
+                     <div class="invalid-feedback"></div>
+                  </div>
                </div>
-            </div>
-            <div class="row">
-               <div class="form-register">
-                  <label class="col-12 sinPadding" for="pais">PAIS DE RESIDENCIA</label>
-                  <select class="col-12" name="country_id" data-name="país de residencia">
+               <div class="row">
+                  <div class="form-register">
+                     <label class="col-12 sinPadding" for="pais">PAIS DE RESIDENCIA <span
+                           class="asterisco">*</span></label>
+                     <select class="col-12" name="country_id" data-name="país de residencia">
                         <option value="">Elegí un país</option>
                         <% countries.forEach(oneCountry => { %>
                         <option value="<%= oneCountry.id %>"> <%= oneCountry.name %> </option>
                         <% }) %>
-                    </select>
-                    <div class="invalid-feedback"> </div>
+                     </select>
+                     <div class="invalid-feedback"> </div>
+                  </div>
                </div>
+               <div class="row">
+                  <div class="form-register">
+                     <label class="col-12 sinPadding " for="city">CIUDAD DE RESIDENCIA <span
+                           class="asterisco">*</span></label>
+                     <input class="col-12 register" type="text" name="city" id="ciudad"
+                        data-name="cuidad de residencia">
+                     <div class="invalid-feedback"> </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-register">
+                     <label class="col-12 sinPadding" for="mail">CORREO ELECTRÓNICO <span
+                           class="asterisco">*</span></label>
+                     <input class="col-12 register" type="email" name="email" id="mail" data-name="correo eléctronico">
+                     <div class="invalid-feedback"> </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-register">
+                     <label class="col-12 sinPadding" for="pass">CONTRASEÑA <span class="asterisco">*</span></label>
+                     <input class="col-12 register" type="password" name="password" id="pass" data-name="contraseña">
+                     <div class="invalid-feedback"> </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="examinar">
+                     <label class="col-12 examinar">SUBIR IMAGEN<span class="asterisco"> *</span></label>
+                     <input class="col-12 examinar" type="file" name="avatar" data-name="subir imagen">
+                  </div>
+                  <div class="avatar-error"> </div>
+               </div>
+               <p>
+                  <label class="check-register" for="cond"><input type="checkbox" name="cond" id="cond"> He leido y
+                     acepto
+                     los terminos y condiciones </label>
+               </p>
             </div>
-            <div class="row">
-               <div class="form-register">
-                  <label class="col-12 sinPadding " for="city">CIUDAD DE RESIDENCIA</label>
-                  <input class="col-12 register" type="text" name="city" id="ciudad" data-name="cuidad de residencia">
-                  <div class="invalid-feedback"> </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="form-register">
-                  <label class="col-12 sinPadding" for="mail">CORREO ELECTRÓNICO</label>
-                  <input class="col-12 register" type="email" name="email" id="mail" data-name="correo eléctronico">
-                  <div class="invalid-feedback"> </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="form-register">
-                  <label class="col-12 sinPadding" for="pass">CONTRASEÑA</label>
-                  <input class="col-12 register" type="password" name="password" id="pass" data-name="contraseña">
-                  <div class="invalid-feedback"> </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="examinar">
-                   <label class="col-12 examinar">SUBIR IMAGEN</label>
-                   <input class="col-12 examinar" type="file" name="avatar" data-name="subir imagen">
-               </div>
-               <div class="avatar-error"> </div>
-           </div>
             <p>
-               <label class="check-register" for="cond"><input type="checkbox" name="cond" id="cond"> He leido y acepto
-                  los terminos y condiciones </label>
+               <label class="check-register" for="news"><input type="checkbox" name="news" id="news"> Me gustaria
+                  recibir
+                  el newsletter con las novedades de SportwearClub </label>
             </p>
-         </div>
-         <p>
-            <label class="check-register" for="news"><input type="checkbox" name="news" id="news"> Me gustaria recibir
-             el newsletter con las novedades de SportwearClub </label>
-         </p>
-         <button type="submit" class="boton-register">ENVIAR</button>
-         <button type="reset" class="boton-register">BORRAR</button>
-         <div class="error-msg"></div>
-      </form>
-   </div>
-</div>
-<div class="div-register">
-   <p><a href="/" class="footer-register"> SUSCRIBITE, ENTERATE DE LAS NOVEDADES Y DESCUENTOS</a></p>
-</div>
 
-<%- include('../partials/footer') %>
+            <button type="submit" class="boton-register">ENVIAR</button>
+            <button type="reset" class="boton-register">BORRAR</button>
+
+         </form>
+         <p>Todos los campos marcados con (<span class="asterisco">*</span>) son obligatorios</p>
+         <div class="error-msg"></div>
+      </div>
+   </div>
+   <div class="div-register">
+      <p><a href="/" class="footer-register"> SUSCRIBITE, ENTERATE DE LAS NOVEDADES Y DESCUENTOS</a></p>
+   </div>
+
+   <%- include('../partials/footer') %>
